@@ -37,7 +37,7 @@ public class CategoryAdapterSecond extends RecyclerView.Adapter<CategoryAdapterS
     @NonNull
     @Override
     public CategoryAdapterSecondViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item_main, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.secondary_category_item, parent, false);
         CategoryAdapterSecondViewHolder categoryViewHolder = new CategoryAdapterSecondViewHolder(view);
         return categoryViewHolder;
     }
@@ -45,7 +45,6 @@ public class CategoryAdapterSecond extends RecyclerView.Adapter<CategoryAdapterS
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapterSecondViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
-        Picasso.with(context).load(categoriesItemArrayList.get(position).getCategoryImage()).fit().into(holder.categoryItemSecondImageView);
         holder.categoryItemSecondTextView.setText(categoriesItemArrayList.get(position).getCategoryTitle());
 
 
@@ -78,13 +77,11 @@ public class CategoryAdapterSecond extends RecyclerView.Adapter<CategoryAdapterS
 
     public static class CategoryAdapterSecondViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout constraintSecondCategory;
-        ImageView categoryItemSecondImageView;
         TextView categoryItemSecondTextView;
 
         public CategoryAdapterSecondViewHolder(@NonNull View itemView) {
             super(itemView);
             constraintSecondCategory = itemView.findViewById(R.id.constraint_main_category);
-            categoryItemSecondImageView = itemView.findViewById(R.id.category_item_main_image_view);
             categoryItemSecondTextView = itemView.findViewById(R.id.category_item_main_text_view);
         }
     }
