@@ -75,9 +75,6 @@ public class SecondaryCategoryActivity extends AppCompatActivity {
     String description;
     boolean hasChild;
 
-    ImageView categoryItemSecondImageView;
-    TextView categoryItemSecondTextView;
-
 
     ImageView voiceSearchSecCat;
     
@@ -110,8 +107,6 @@ public class SecondaryCategoryActivity extends AppCompatActivity {
 
         searchSecondaryCategoryEditText = findViewById(R.id.search_secondary_category_edit_text);
 
-        categoryItemSecondImageView=findViewById(R.id.category_item_second_image_view);
-        categoryItemSecondTextView=findViewById(R.id.category_item_second_text_view);
         voiceSearchSecCat=findViewById(R.id.voice_search_sec_cat);
 
         toolbarMain=findViewById(R.id.toolbar_main);
@@ -272,9 +267,6 @@ public class SecondaryCategoryActivity extends AppCompatActivity {
         parentId = intent.getIntExtra("parent_id",0);
         description = intent.getStringExtra("description");
         hasChild = intent.getBooleanExtra("has_child",false);
-
-        Picasso.with(SecondaryCategoryActivity.this).load(catImage).fit().into(categoryItemSecondImageView);
-        categoryItemSecondTextView.setText(catTitle);
 
 
         searchSecondaryCategoryEditText.setHint("جستجو در دسته بندی " + catTitle + " ...");

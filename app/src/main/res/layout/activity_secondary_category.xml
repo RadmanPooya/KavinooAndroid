@@ -81,47 +81,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/material_card_view_sec_cat_fr">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_second_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/category_item_second_image_view"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:scaleType="fitXY"
-                android:layout_marginEnd="@dimen/_18sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:gravity="center"
-                android:id="@+id/category_item_second_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                style="@style/iransansbold"
-                android:textSize="@dimen/_14ssp"
-                android:textColor="#033550"
-                android:maxLines="1"
-                android:layout_marginEnd="@dimen/_25sdp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/category_item_second_image_view"
-                app:layout_constraintBottom_toBottomOf="parent" />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="#E5E5E6"
-                app:layout_constraintTop_toBottomOf="@id/category_item_second_image_view"
-                android:layout_marginTop="@dimen/_9sdp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_main_sec_category"
             android:layout_width="match_parent"
@@ -132,7 +91,7 @@
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraint_second_category" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
