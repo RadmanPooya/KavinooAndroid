@@ -1,0 +1,69 @@
+[
+  {
+    "category_id": 12,
+    "category_title": "غذا",
+    "category_image": "categoryImages/hfdFv1glOmQe4mGIFYiPwRQTu9DIxtUTwqSgTsiu.jpg",
+    "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز",
+    "parent_id": null,
+    "position": 100,
+    "status": 1,
+    "created_at": "14:57:28 1399/12/24",
+    "updated_at": "2021-03-15 05:09:04",
+    "deleted_at": null,
+    "has_child": true,
+    "parent": null
+  },
+  {
+    "category_id": 15,
+    "category_title": "خودرو",
+    "category_image": "categoryImages/7IfD0vOO5MsadJrgNlfLGT7EhXqNbdIqaApkOqwY.jpg",
+    "description": null,
+    "parent_id": null,
+    "position": 40,
+    "status": 1,
+    "created_at": "20:03:54 1399/12/24",
+    "updated_at": "2021-03-14 20:03:54",
+    "deleted_at": null,
+    "has_child": false,
+    "parent": null
+  },
+  {
+    "category_id": 20,
+    "category_title": "فروشگاه زنجیره ای",
+    "category_image": "categoryImages/oJ5tWIqePn3kRO0JNtuKmG1tX1HoIAsqW4gB2x08.jpg",
+    "description": null,
+    "parent_id": null,
+    "position": 80,
+    "status": 1,
+    "created_at": "03:49:45 1399/12/25",
+    "updated_at": "2021-03-15 03:49:45",
+    "deleted_at": null,
+    "has_child": false,
+    "parent": null
+  },
+  {
+    "category_id": 17,
+    "category_title": "کافه",
+    "category_image": "categoryImages/n9ntX3RdLXQWwUmZT2kjY5CzMgfPJ5Hypq6FxGOx.jpg",
+    "description": null,
+    "parent_id": 12,
+    "position": 60,
+    "status": 1,
+    "created_at": "03:38:09 1399/12/25",
+    "updated_at": "2021-03-15 07:06:38",
+    "deleted_at": null,
+    "has_child": false,
+    "parent": {
+      "category_id": 12,
+      "category_title": "غذا",
+      "category_image": "categoryImages/hfdFv1glOmQe4mGIFYiPwRQTu9DIxtUTwqSgTsiu.jpg",
+      "description": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز",
+      "parent_id": null,
+      "position": 100,
+      "status": 1,
+      "created_at": "2021-03-14 14:57:28",
+      "updated_at": "2021-03-15 05:09:04",
+      "deleted_at": null
+    }
+  }
+]

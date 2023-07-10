@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layoutDirection="ltr">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        app:cardBackgroundColor="#eaeaea"
+
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ass1"
+                style="@style/iransansregular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="برخورد پرسنل"
+                android:textColor="#000000"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/iransansbold"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layoutDirection="ltr"
+                android:stepSize="1"
+                android:value="3"
+                android:valueFrom="1"
+                android:valueTo="5"
+                app:labelBehavior="gone"
+                app:haloRadius="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ass1"
+                app:thumbColor="#EE9247"
+                app:thumbElevation="0dp"
+                app:thumbRadius="@dimen/_6sdp"
+                app:tickColorActive="#EE9247"
+                app:tickColorInactive="#E5E5E5"
+                app:trackColorActive="#EE9247"
+                app:trackColorInactive="#ffffff"
+                app:trackHeight="@dimen/_8sdp" />
+
+            <TextView
+                android:id="@+id/ass2"
+                style="@style/iransansregular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="بهداشت محیط"
+                android:textColor="#000000"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/iransansbold"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider1" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layoutDirection="ltr"
+                android:stepSize="1"
+                android:value="3"
+                android:valueFrom="1"
+                android:valueTo="5"
+                app:labelBehavior="gone"
+                app:haloRadius="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ass2"
+                app:thumbColor="#367AB9"
+                app:thumbElevation="0dp"
+                app:thumbRadius="@dimen/_6sdp"
+                app:tickColorActive="#367AB9"
+                app:tickColorInactive="#E5E5E5"
+                app:trackColorActive="#367AB9"
+                app:trackColorInactive="#ffffff"
+                app:trackHeight="@dimen/_8sdp" />
+
+            <TextView
+                android:id="@+id/ass3"
+                style="@style/iransansregular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قیمت مناسب"
+                android:textColor="#000000"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/iransansbold"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider2" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layoutDirection="ltr"
+                android:stepSize="1"
+                android:value="3"
+                android:valueFrom="1"
+                android:valueTo="5"
+                app:labelBehavior="gone"
+                app:haloRadius="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ass3"
+                app:thumbColor="#7E7F80"
+                app:thumbElevation="0dp"
+                app:thumbRadius="@dimen/_6sdp"
+                app:tickColorActive="#7E7F80"
+                app:tickColorInactive="#E5E5E5"
+                app:trackColorActive="#7E7F80"
+                app:trackColorInactive="#ffffff"
+                app:trackHeight="@dimen/_8sdp" />
+
+            <TextView
+                android:id="@+id/ass4"
+                style="@style/iransansregular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="کیفیت بالا"
+                android:textColor="#000000"
+                android:textSize="@dimen/_13ssp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="@font/iransansbold"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider3" />
+
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layoutDirection="ltr"
+                android:stepSize="1"
+                android:value="3"
+                android:valueFrom="1"
+                android:valueTo="5"
+                app:labelBehavior="gone"
+                app:haloRadius="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ass4"
+                app:thumbColor="#CB0B84"
+                app:thumbRadius="@dimen/_6sdp"
+                app:thumbElevation="0dp"
+                app:tickColorActive="#CB0B84"
+                app:tickColorInactive="#E5E5E5"
+                app:trackColorActive="#CB0B84"
+                app:trackColorInactive="#ffffff"
+                app:trackHeight="@dimen/_8sdp" />
+
+            <ImageView
+                android:id="@+id/add_assessment"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_27sdp"
+                android:src="@drawable/addratebutton"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/slider4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit_add_assessment"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:SpinKit_Color="@color/colorBlue"
+                app:layout_constraintBottom_toBottomOf="@+id/add_assessment"
+                app:layout_constraintEnd_toEndOf="@+id/add_assessment"
+                app:layout_constraintStart_toStartOf="@+id/add_assessment"
+                app:layout_constraintTop_toTopOf="@+id/add_assessment"/>
+
+            <TextView
+                android:id="@+id/add_assessment_text_view"
+                style="@style/iransansregular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="ثبت بازخورد"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/iransansbold"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/add_assessment"
+                app:layout_constraintEnd_toEndOf="@+id/add_assessment"
+                app:layout_constraintStart_toStartOf="@+id/add_assessment"
+                app:layout_constraintTop_toTopOf="@+id/add_assessment" />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_assessment" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_21sdp"
+        app:cardBackgroundColor="@color/colorBlue"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:layout_constraintBottom_toTopOf="@id/cardView"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView">
+
+        <TextView
+            style="@style/iransansregular"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:gravity="center"
+            android:text=" افزودن بازخورد "
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_14ssp" />
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

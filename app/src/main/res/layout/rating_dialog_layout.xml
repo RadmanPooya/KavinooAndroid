@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="ltr">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_130sdp"
+        android:layout_margin="@dimen/_15sdp"
+        app:cardBackgroundColor="#F1F1F1"
+
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                android:id="@+id/rating_bar"
+                style="@style/Widget.MaterialRatingBar.RatingBar"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/_40sdp"
+                android:layout_height="wrap_content"
+                app:mrb_progressTint="#d59258"
+                app:mrb_secondaryProgressTint="#d59258"
+                android:rating="2.5"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/add_rate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/add_rate"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/addratebutton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/add_rate_text_view"
+                style="@style/iransansregular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="ثبت امتیاز"
+                android:textColor="@color/colorBlue"
+                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/iransansbold"
+                app:layout_constraintBottom_toBottomOf="@+id/add_rate"
+                app:layout_constraintEnd_toEndOf="@+id/add_rate"
+                app:layout_constraintStart_toStartOf="@+id/add_rate"
+                app:layout_constraintTop_toTopOf="@+id/add_rate" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit_add_rate"
+                style="@style/SpinKitView.Large.ThreeBounce"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                app:SpinKit_Color="@color/colorBlue"
+                app:layout_constraintBottom_toBottomOf="@+id/add_rate"
+                app:layout_constraintEnd_toEndOf="@+id/add_rate"
+                app:layout_constraintStart_toStartOf="@+id/add_rate"
+                app:layout_constraintTop_toTopOf="@+id/add_rate"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_21sdp"
+        app:cardBackgroundColor="#367ab9"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@id/cardView">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="   امتیاز دهی   "
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_14ssp"
+            style="@style/iransansregular"/>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

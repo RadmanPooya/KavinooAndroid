@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 32
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.kavinoo.kavinoo"
+        minSdkVersion 26
+        targetSdkVersion 32
+        versionCode 6
+        versionName "1.5.1"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation 'com.cuberto.flashytabbarandroid:flashytabbarandroid:1.0.0'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    //room
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.8'
+    //volley
+    implementation 'com.android.volley:volley:1.2.0'
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    //shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    //spint kit progress
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    //bottom sheet
+    implementation 'com.github.michael-rapp:android-bottom-sheet:2.0.0'
+    //map
+    implementation 'ir.map:map-sdk:4.0.2'
+    //slider
+    implementation 'com.github.smarteist:autoimageslider:1.4.0-appcompat'
+    //exo player
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
+    //snack bar custom
+    implementation 'org.aviran.cookiebar2:cookiebar2:1.1.4'
+    //rate
+    implementation 'me.zhanghai.android.materialratingbar:library:1.3.3'
+    implementation 'com.android.support:multidex:2.0.1'
+    //progress rounded
+    implementation 'com.github.MackHartley:RoundedProgressBar:3.0.0'
+    //circular progress
+    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+    implementation 'com.akexorcist:round-corner-progress-bar:2.1.2'
+    implementation 'com.tbuonomo:dotsindicator:4.3'
+
+}
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+repositories {
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/Cuberto/flashy-tabbar-android")
+        credentials {
+            /** Create github.properties in root project folder file with
+             ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
+             ** Or set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
+            username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+        }
+    }
+}

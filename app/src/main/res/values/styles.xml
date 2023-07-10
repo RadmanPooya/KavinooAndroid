@@ -1,0 +1,62 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorAccent">@color/ic_launcher_kavinoo_background</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="customfontstyle" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/byekan</item>
+    </style>
+    <style name="iransansregular" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/iransansregular</item>
+    </style>
+
+    <style name="iransansbold" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/iransansbold</item>
+    </style>
+
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <item name="iconSize">@dimen/_45sdp</item>
+        <item name="colorButtonNormal">#117db3</item>
+        <item name="tabTextAppearance">@style/YourTextAppareance</item>
+        <item name="android:fontFamily">@font/iransansbold</item>
+    </style>
+
+    <style name="YourTextAppareance" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/byekan</item>
+    </style>
+
+    <style name="mainStyle" parent="AppTheme">
+        <item name="cookieTitleColor">@color/myColorWhite</item>
+        <item name="cookieMessageColor">@color/myColorWhite</item>
+        <item name="cookieActionColor">@color/myColorWhite</item>
+        <item name="cookieBackgroundColor">@color/colorBlue</item>
+        <item name="cookiePadding">@dimen/_13sdp</item>
+        <item name="cookieTitleSize">@dimen/_14ssp</item>
+        <item name="cookieMessageSize">@dimen/_3ssp</item>
+        <item name="cookieActionSize">@dimen/_16ssp</item>
+        <item name="android:fontFamily">@font/iransansbold</item>
+    </style>
+
+    <style name="BottomSheet" parent="BottomSheet.Light">
+        <item name="android:fontFamily">@font/sans</item>
+        <item name="android:textColor">@color/colorBlue</item>
+        <item name="colorPrimary">@color/myColorWhite</item>
+        <item name="colorPrimaryDark">#f9fbfb</item>
+        <item name="colorPrimaryVariant">@color/myColorWhite</item>
+        <item name="colorOnPrimary">@color/myColorWhite</item>
+        <item name="bottomSheetTitleColor">@color/colorBlue</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorBlue</item>
+        <item name="colorSecondaryVariant">@color/colorBlue</item>
+        <item name="colorOnSecondary">@color/myColorWhite</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/_11ssp</item>
+    </style>
+
+</resources>

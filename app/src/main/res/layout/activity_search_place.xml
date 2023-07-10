@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SearchPlaceActivity"
+    android:layoutDirection="ltr">
+
+    <include
+        android:id="@+id/toolbar_main"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/material_card_view_places_activty"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_37sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="#FFFFFF"
+        android:transitionName="search_transition_name"
+        app:cardElevation="@dimen/_15sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_main" >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/voice_search_places_cat_activty"
+                android:layout_width="@dimen/_29sdp"
+                android:layout_height="@dimen/_29sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:src="@drawable/searchwithvoice"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/search_image_view_places_activty"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:src="@drawable/searchicon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/search_place_with_category"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_2sdp"
+                android:imeOptions="actionSearch"
+                android:inputType="text|textNoSuggestions"
+                style="@style/iransansregular"
+                android:textColorHint="#83929A"
+                android:textColor="@color/colorBlue"
+                android:paddingHorizontal="@dimen/_2sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textDirection="rtl"
+                android:hint="بهترین و نزدیک ترین را جستجو کنید ..."
+                android:textStyle="bold"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/search_image_view_places_activty"
+                app:layout_constraintStart_toEndOf="@+id/voice_search_places_cat_activty"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/linear_tools_place_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/material_card_view_places_activty"
+        app:layout_constraintEnd_toEndOf="@+id/material_card_view_places_activty"
+        app:layout_constraintTop_toBottomOf="@+id/material_card_view_places_activty">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_weight="0.6"
+            android:layout_height="@dimen/_30sdp"
+            android:background="#FFFFFF"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/_7sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:src="@drawable/sortbyplacemainicon"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/sort_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="نزدیک ترین"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="#0c7ab1"
+                    style="@style/iransansregular"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_14ssp"
+                    android:layout_marginHorizontal="@dimen/_7sdp"/>
+                <TextView
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="مرتب سازی بر اساس"
+                    android:maxLines="1"
+                    android:textColor="#b2c6d4"
+                    style="@style/iransansregular"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_11ssp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/show_in_location"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="#FFFFFF"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/aroundmeplacemainicon"
+                android:layout_margin="@dimen/_4sdp"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/filter_place_category_card_view"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="#FFFFFF"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp">
+            <ImageView
+                android:layout_margin="@dimen/_4sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/filterplacemainicon"/>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/cons_for_recycler_places_activty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_tools_place_main">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_places_with_category"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:clipChildren="true"
+            android:visibility="gone"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_place_list"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <include layout="@layout/places_item_shimmer" />
+                <include layout="@layout/places_item_shimmer" />
+                <include layout="@layout/places_item_shimmer" />
+
+
+
+            </LinearLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

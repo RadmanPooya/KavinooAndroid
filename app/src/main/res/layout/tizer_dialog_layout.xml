@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="ltr"
+    android:keepScreenOn="true">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        app:cardBackgroundColor="#eaeaea"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_15sdp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="@dimen/_275sdp"
+                android:layout_height="@dimen/_155sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="#eaeaea"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/player_view"
+                    android:layout_width="@dimen/_275sdp"
+                    android:layout_height="@dimen/_155sdp"
+                    android:layout_gravity="center"
+                    app:controller_layout_id="@layout/custom_controler_player_tizer"
+                    app:fastforward_increment="10000"
+                    app:hide_on_touch="true"
+                    app:player_layout_id="@layout/exo_simple_player_view"
+                    app:resize_mode="fit"
+                    app:rewind_increment="10000"
+                    app:show_timeout="5000"
+                    app:use_controller="true" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/colorBlue"
+                    app:layout_constraintBottom_toBottomOf="@+id/player_view"
+                    app:layout_constraintEnd_toEndOf="@+id/player_view"
+                    app:layout_constraintStart_toStartOf="@+id/player_view"
+                    app:layout_constraintTop_toTopOf="@+id/player_view" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_21sdp"
+        app:cardBackgroundColor="@color/colorBlue"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@id/cardView">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="     تیزر     "
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_14ssp"
+            style="@style/iransansregular"/>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

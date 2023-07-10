@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kavinoo.kavinoo">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:name="com.kavinoo.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_kavinoo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_kavinoo_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:supportsRtl">
+        <activity
+            android:name=".activity.FullScreenTizerActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.StartIntroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.IntroAppActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FavoriteActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.AccountDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.ReportActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.ShowInMapActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.MenuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.DiscountActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.OfferActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.RecreationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.SelectLocationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.PlaceActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="kavinoo.com"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SearchPlaceActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.PlacesWithCategoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle">
+            <intent-filter>
+                <action android:name="com.google.android.gms.actions.SEARCH_ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SecondaryCategoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle" />
+        <activity
+            android:name=".activity.SplashScreen"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/mainStyle"
+            android:windowSoftInputMode="adjustPan" />
+    </application>
+
+</manifest>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity"
+    android:layoutDirection="ltr">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_110sdp"
+        android:layout_marginHorizontal="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:src="@drawable/logolocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/wellcometokavinoo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+    <ImageView
+        android:id="@+id/login_cadr"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_135sdp"
+        android:src="@drawable/logincadr"
+        android:scaleType="fitXY"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"/>
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/iransansbold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:text="لطفا شماره موبایل خود را وارد كنيد"
+        android:textColor="@color/colorBlue"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="@id/login_cadr"
+        app:layout_constraintStart_toStartOf="@id/login_cadr"
+        app:layout_constraintTop_toTopOf="@id/login_cadr" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginHorizontal="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:cardBackgroundColor="@color/myColorWhite"
+        app:cardCornerRadius="@dimen/_7sdp"
+        app:cardElevation="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="@id/login_cadr"
+        app:layout_constraintStart_toStartOf="@id/login_cadr"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/phone_icon_login"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:src="@drawable/phoneiconlogin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="@dimen/_3sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:src="@drawable/lineiconlogin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/phone_icon_login"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/mobile_phone_edit_text"
+                style="@style/iransansregular"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_2sdp"
+                android:background="@null"
+                android:hint="09123456789"
+                android:imeOptions="actionDone"
+                android:inputType="number|textNoSuggestions"
+                android:maxLength="11"
+                android:paddingHorizontal="@dimen/_2sdp"
+                android:textColor="@color/colorBlue"
+                android:textColorHint="#BEC5C8"
+                android:textSize="@dimen/_17ssp"
+                android:textStyle="bold"
+                android:textCursorDrawable="@drawable/color_cursor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/send_code"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/buttonlogin"
+        app:layout_constraintBottom_toBottomOf="@+id/login_cadr"
+        app:layout_constraintEnd_toEndOf="@+id/login_cadr"
+        app:layout_constraintStart_toStartOf="@id/login_cadr"
+        app:layout_constraintTop_toBottomOf="@+id/login_cadr" />
+
+    <TextView
+        android:id="@+id/send_code_text_view"
+        style="@style/iransansbold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=" ارسال کد تایید "
+        android:textColor="@color/colorBlue"
+        android:gravity="center"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/send_code"
+        app:layout_constraintEnd_toEndOf="@+id/send_code"
+        app:layout_constraintStart_toStartOf="@+id/send_code"
+        app:layout_constraintTop_toTopOf="@+id/send_code" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        android:layout_width="@dimen/_38sdp"
+        android:layout_height="@dimen/_38sdp"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        app:SpinKit_Color="@color/colorBlue"
+        app:layout_constraintBottom_toBottomOf="@+id/send_code"
+        app:layout_constraintEnd_toEndOf="@+id/send_code"
+        app:layout_constraintStart_toStartOf="@+id/send_code"
+        app:layout_constraintTop_toTopOf="@+id/send_code"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_140sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/loginback"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

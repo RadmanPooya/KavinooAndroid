@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.AddLocationFragment"
+    android:layoutDirection="ltr">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar_main"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="@dimen/_13sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_20sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/_7sdp"
+                                android:layout_weight="0.5">
+
+                                <ImageView
+                                    android:id="@+id/add_my_business"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:src="@drawable/taboffaddplace"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/add_my_business_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="@dimen/_5sdp"
+                                    android:fontFamily="@font/sans"
+                                    android:gravity="center"
+                                    android:layoutDirection="rtl"
+                                    android:text="ثبت کسب و کار من"
+                                    android:textColor="#bfced5"
+                                    android:textSize="@dimen/_10ssp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/_7sdp"
+                                android:layout_weight="0.5">
+
+                                <ImageView
+                                    android:id="@+id/add_favorite_business"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_50sdp"
+                                    android:src="@drawable/tabonaddplace"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/add_favorite_business_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="@dimen/_5sdp"
+                                    android:fontFamily="@font/sans"
+                                    android:gravity="center"
+                                    android:layoutDirection="rtl"
+                                    android:text="ثبت کسب و کار محبوب"
+                                    android:textColor="@color/myColorWhite"
+                                    android:textSize="@dimen/_10ssp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:id="@+id/add_favorite_business_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/title_place_cadr"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_33sdp"
+                                android:layout_marginHorizontal="@dimen/_20sdp"
+                                android:src="@drawable/bigcadrinput"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <EditText
+                                android:id="@+id/title_place"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:background="@null"
+                                android:fontFamily="@font/sans"
+                                android:hint="عنوان مکان"
+                                android:inputType="textVisiblePassword|textNoSuggestions"
+                                android:layoutDirection="rtl"
+                                android:textColor="#647278"
+                                android:textColorHint="#99a9b0"
+                                android:textCursorDrawable="@null"
+                                android:textSize="@dimen/_9ssp"
+                                app:layout_constraintBottom_toBottomOf="@+id/title_place_cadr"
+                                app:layout_constraintEnd_toEndOf="@+id/title_place_cadr"
+                                app:layout_constraintStart_toStartOf="@+id/title_place_cadr"
+                                app:layout_constraintTop_toTopOf="@+id/title_place_cadr" />
+
+                            <ImageView
+                                android:id="@+id/category_cadr"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_33sdp"
+                                android:layout_marginHorizontal="@dimen/_20sdp"
+                                android:layout_marginTop="@dimen/_23sdp"
+                                android:src="@drawable/bigcadrinput"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/title_place_cadr" />
+
+                            <TextView
+                                android:id="@+id/category"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:fontFamily="@font/sans"
+                                android:gravity="center_vertical"
+                                android:hint="دسته بندی"
+                                android:layoutDirection="rtl"
+                                android:textColor="#647278"
+                                android:textColorHint="#99a9b0"
+                                android:textSize="@dimen/_9ssp"
+                                app:layout_constraintBottom_toBottomOf="@+id/category_cadr"
+                                app:layout_constraintEnd_toEndOf="@+id/category_cadr"
+                                app:layout_constraintStart_toStartOf="@+id/category_cadr"
+                                app:layout_constraintTop_toTopOf="@+id/category_cadr" />
+
+
+                            <ImageView
+                                android:id="@+id/sub_category_cadr"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_33sdp"
+                                android:layout_marginHorizontal="@dimen/_20sdp"
+                                android:layout_marginTop="@dimen/_23sdp"
+                                android:src="@drawable/bigcadrinput"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/category_cadr" />
+
+                            <TextView
+                                android:id="@+id/sub_category"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:fontFamily="@font/sans"
+                                android:gravity="center_vertical"
+                                android:hint="زیر دسته بندی"
+                                android:layoutDirection="rtl"
+                                android:textColor="#647278"
+                                android:textColorHint="#99a9b0"
+                                android:textSize="@dimen/_9ssp"
+                                app:layout_constraintBottom_toBottomOf="@+id/sub_category_cadr"
+                                app:layout_constraintEnd_toEndOf="@+id/sub_category_cadr"
+                                app:layout_constraintStart_toStartOf="@+id/sub_category_cadr"
+                                app:layout_constraintTop_toTopOf="@+id/sub_category_cadr" />
+
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/select_location_text_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/sans"
+                                android:gravity="center"
+                                android:text="انتخاب آدرس از روی نقشه"
+                                android:textColor="#bfced5"
+                                android:textSize="@dimen/_9ssp"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_130sdp">
+                            <androidx.cardview.widget.CardView
+                                android:transitionName="search_transition_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardElevation="0dp"
+                                app:cardCornerRadius="@dimen/_20sdp"
+                                android:layout_marginHorizontal="@dimen/_20sdp">
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <ImageView
+                                        android:id="@+id/map_demo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/mapdemo"
+                                        tools:layout_editor_absoluteX="114dp"
+                                        tools:layout_editor_absoluteY="28dp" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/_18sdp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="@dimen/_2sdp">
+
+                                <ImageView
+                                    android:id="@+id/website_cadr"
+                                    android:layout_width="@dimen/_235sdp"
+                                    android:layout_height="@dimen/_33sdp"
+                                    android:src="@drawable/largecadrinput"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <EditText
+                                    android:id="@+id/location_add"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginHorizontal="@dimen/_5sdp"
+                                    android:background="@null"
+                                    android:fontFamily="@font/sans"
+                                    android:gravity="center_vertical"
+                                    android:text=" آدرس "
+                                    android:inputType="textNoSuggestions"
+                                    android:layoutDirection="rtl"
+                                    android:textColor="#99a9b0"
+                                    android:textSize="@dimen/_9ssp"
+                                    android:textCursorDrawable="@drawable/color_cursor_login_register"
+                                    app:layout_constraintBottom_toBottomOf="@+id/website_cadr"
+                                    app:layout_constraintEnd_toEndOf="@+id/website_cadr"
+                                    app:layout_constraintStart_toStartOf="@+id/website_cadr"
+                                    app:layout_constraintTop_toTopOf="@+id/website_cadr" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="@dimen/_2sdp">
+
+                                <ImageView
+                                    android:id="@+id/website_icon_cadr"
+                                    android:layout_width="@dimen/_32sdp"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:src="@drawable/imageiconcadrinput"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/website_icon"
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:src="@drawable/locationiconaddress"
+                                    android:layout_margin="@dimen/_7sdp"
+                                    app:layout_constraintBottom_toBottomOf="@+id/website_icon_cadr"
+                                    app:layout_constraintEnd_toEndOf="@+id/website_icon_cadr"
+                                    app:layout_constraintStart_toStartOf="@+id/website_icon_cadr"
+                                    app:layout_constraintTop_toTopOf="@+id/website_icon_cadr" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/sabt_general_cadr"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_33sdp"
+                                android:layout_marginHorizontal="@dimen/_20sdp"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:src="@drawable/sabtgeneralcadr"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/sabt_general"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/_5sdp"
+                                android:fontFamily="@font/sans"
+                                android:gravity="center"
+                                android:text="ثبت کسب و کار محبوب"
+                                android:layoutDirection="rtl"
+                                android:textColor="@color/colorBlue"
+                                android:textSize="@dimen/_11ssp"
+                                app:layout_constraintBottom_toBottomOf="@+id/sabt_general_cadr"
+                                app:layout_constraintEnd_toEndOf="@+id/sabt_general_cadr"
+                                app:layout_constraintStart_toStartOf="@+id/sabt_general_cadr"
+                                app:layout_constraintTop_toTopOf="@+id/sabt_general_cadr" />
+
+                            <com.github.ybq.android.spinkit.SpinKitView
+                                android:id="@+id/progress_sabt_general"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:SpinKit_Color="@color/colorBlue"
+                                android:visibility="invisible"
+                                app:layout_constraintBottom_toBottomOf="@+id/sabt_general_cadr"
+                                app:layout_constraintEnd_toEndOf="@+id/sabt_general_cadr"
+                                app:layout_constraintStart_toStartOf="@+id/sabt_general_cadr"
+                                app:layout_constraintTop_toTopOf="@+id/sabt_general_cadr" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/add_my_business_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/details_visitor"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_marginHorizontal="@dimen/_17sdp"
+                                android:src="@drawable/detailsvisitor"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/download_kvisitor"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_33sdp"
+                                android:layout_marginHorizontal="@dimen/_45sdp"
+                                android:src="@drawable/downloadkvisitor"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/details_visitor" />
+
+                            <ImageView
+                                android:id="@+id/back_downloadk_visitor"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_310sdp"
+                                android:src="@drawable/backdownloadkvisitor"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/download_kvisitor" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp"
+            android:src="@drawable/bottomnavborder"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>
