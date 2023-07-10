@@ -71,7 +71,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.mrapp.android.bottomsheet.BottomSheet;
 
 public class PlacesWithCategoryActivity extends AppCompatActivity implements FilterFacilitiesAdapter.ISelectFacility {
 
@@ -121,7 +120,6 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
 
     List<String> sorting = new ArrayList<>();
 
-    BottomSheet.Builder sortingBottomSheetBuilder;
 
     String sortIdSelected = "0";
 
@@ -192,12 +190,6 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
 
         userInfoManager = new UserInfoManager(PlacesWithCategoryActivity.this);
 
-        sortingBottomSheetBuilder = new BottomSheet.Builder(PlacesWithCategoryActivity.this, R.style.BottomSheet);
-        sortingBottomSheetBuilder.setTitleColor(Color.parseColor("#367ab9"));
-
-        sortingBottomSheetBuilder.addItem(0, "نزدیک ترین");
-        sortingBottomSheetBuilder.addItem(1, "بهترین");
-        sortingBottomSheetBuilder.addItem(2, "بهترین و نزدیک ترین");
         sortIdSelected = "0";
 
 
@@ -351,26 +343,8 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
         sortCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheet categoryBottomSheet = sortingBottomSheetBuilder.create();
-                categoryBottomSheet.show();
-                sortingBottomSheetBuilder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (String.valueOf(id).equals("0")) {
-                            sortTextView.setText("نزدیک ترین");
-                            sortIdSelected = "0";
-                        }
-                        if (String.valueOf(id).equals("1")) {
-                            sortTextView.setText("بهترین");
-                            sortIdSelected = "1";
-                        }
-                        if (String.valueOf(id).equals("2")) {
-                            sortTextView.setText("بهترین و نزدیک ترین");
-                            sortIdSelected = "2";
-                        }
-                        getPlaceData();
-                    }
-                });
+
+                showSortDialog();
             }
         });
 
@@ -808,4 +782,51 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
             }
         }
     }
+
+    public void showSortDialog() {
+        final Dialog dialog = new Dialog(PlacesWithCategoryActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.sort_places_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        CardView sortTypeZero;
+        CardView sortTypeOne;
+        CardView sortTypeTwo;
+
+        sortTypeZero = dialog.findViewById(R.id.sort_type_zero);
+        sortTypeOne = dialog.findViewById(R.id.sort_type_one);
+        sortTypeTwo = dialog.findViewById(R.id.sort_type_two);
+
+        sortTypeZero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortTextView.setText("نزدیک ترین");
+                sortIdSelected = "0";
+                getPlaceData();
+                dialog.dismiss();
+            }
+        });
+        sortTypeOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortTextView.setText("بهترین");
+                sortIdSelected = "1";
+                getPlaceData();
+                dialog.dismiss();
+            }
+        });
+        sortTypeTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortTextView.setText("بهترین و نزدیک ترین");
+                sortIdSelected = "2";
+                getPlaceData();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
 }

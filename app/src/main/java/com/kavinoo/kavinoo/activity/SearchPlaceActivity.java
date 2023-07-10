@@ -39,6 +39,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,9 +72,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.mrapp.android.bottomsheet.BottomSheet;
 
-public class SearchPlaceActivity extends AppCompatActivity implements FilterFacilitiesAdapter.ISelectFacility{
+public class SearchPlaceActivity extends AppCompatActivity implements FilterFacilitiesAdapter.ISelectFacility {
 
     private static final int REQUEST_CODE_RECORD_AUDIO = 20;
 
@@ -118,7 +118,6 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
 
     List<String> sorting = new ArrayList<>();
 
-    BottomSheet.Builder sortingBottomSheetBuilder;
 
     String sortIdSelected = "0";
 
@@ -129,8 +128,8 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
     CardView kavinooProfile;
     CardView menuToolbar;
     ConstraintLayout toolbarMain;
-    int lastPage=1;
-    int allPagesCount=1;
+    int lastPage = 1;
+    int allPagesCount = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,14 +138,14 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
         setContentView(R.layout.activity_search_place);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        toolbarMain=findViewById(R.id.toolbar_main);
-        menuToolbar=toolbarMain.findViewById(R.id.menu_toolbar);
-        kavinooProfile=toolbarMain.findViewById(R.id.kavinoo_profile);
+        toolbarMain = findViewById(R.id.toolbar_main);
+        menuToolbar = toolbarMain.findViewById(R.id.menu_toolbar);
+        kavinooProfile = toolbarMain.findViewById(R.id.kavinoo_profile);
 
         menuToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SearchPlaceActivity.this, MenuActivity.class);
+                Intent intent = new Intent(SearchPlaceActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });
@@ -154,7 +153,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
         kavinooProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SearchPlaceActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(SearchPlaceActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -179,7 +178,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
             @Override
             public void run() {
 
-                showKeyboard(searchPlaceWithCategory,SearchPlaceActivity.this);
+                showKeyboard(searchPlaceWithCategory, SearchPlaceActivity.this);
             }
         }, 1400);
         /*InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -187,12 +186,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
 
         userInfoManager = new UserInfoManager(SearchPlaceActivity.this);
 
-        sortingBottomSheetBuilder = new BottomSheet.Builder(SearchPlaceActivity.this, R.style.BottomSheet);
-        sortingBottomSheetBuilder.setTitleColor(Color.parseColor("#367ab9"));
-        //sortingBottomSheetBuilder.setBackgroundColor(Color.parseColor("#367ab9"));
-        sortingBottomSheetBuilder.addItem(0, "نزدیک ترین");
-        sortingBottomSheetBuilder.addItem(1, "بهترین");
-        sortingBottomSheetBuilder.addItem(2, "بهترین و نزدیک ترین");
+
         sortIdSelected = "0";
 
 
@@ -283,7 +277,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
         voiceSearchPlacesCatActivty = findViewById(R.id.voice_search_places_cat_activty);
         sortCardView = findViewById(R.id.sort_card_view);
         sortTextView = findViewById(R.id.sort_text_view);
-        showInLocation=findViewById(R.id.show_in_location);
+        showInLocation = findViewById(R.id.show_in_location);
 
     }
 
@@ -297,9 +291,9 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
         showInLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SearchPlaceActivity.this,ShowInMapActivity.class);
-                intent.putExtra("word",word);
-                intent.putExtra("cat_id","notset");
+                Intent intent = new Intent(SearchPlaceActivity.this, ShowInMapActivity.class);
+                intent.putExtra("word", word);
+                intent.putExtra("cat_id", "notset");
                 startActivity(intent);
             }
         });
@@ -330,7 +324,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
 
                 if (ContextCompat.checkSelfPermission(SearchPlaceActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                     checkPermission();
-                }else if (voiceClicked) {
+                } else if (voiceClicked) {
                     performingSpeechSetup = false;
                     voiceSearchPlacesCatActivty.setImageResource(R.drawable.searchwithvoice);
                     speechRecognizer.stopListening();
@@ -356,26 +350,9 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
         sortCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheet categoryBottomSheet = sortingBottomSheetBuilder.create();
-                categoryBottomSheet.show();
-                sortingBottomSheetBuilder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (String.valueOf(id).equals("0")) {
-                            sortTextView.setText("نزدیک ترین");
-                            sortIdSelected = "0";
-                        }
-                        if (String.valueOf(id).equals("1")) {
-                            sortTextView.setText("بهترین");
-                            sortIdSelected = "1";
-                        }
-                        if (String.valueOf(id).equals("2")) {
-                            sortTextView.setText("بهترین و نزدیک ترین");
-                            sortIdSelected = "2";
-                        }
-                        getPlaceData();
-                    }
-                });
+
+                showSortDialog();
+
             }
         });
 
@@ -384,8 +361,8 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
             public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(1) && dy != 0) {
-                    if(lastPage <=allPagesCount){
-                        getPlaceDataTwo(String.valueOf(lastPage+1));
+                    if (lastPage <= allPagesCount) {
+                        getPlaceDataTwo(String.valueOf(lastPage + 1));
                     }
 
                 }
@@ -522,7 +499,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
     }
 
     public void getPlaceDataTwo(String pageNumber) {
-        final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE+"?page="+pageNumber, new Response.Listener<String>() {
+        final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE + "?page=" + pageNumber, new Response.Listener<String>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(String response) {
@@ -684,6 +661,52 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
 
             }
         }
+    }
+
+    public void showSortDialog() {
+        final Dialog dialog = new Dialog(SearchPlaceActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.sort_places_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        CardView sortTypeZero;
+        CardView sortTypeOne;
+        CardView sortTypeTwo;
+
+        sortTypeZero = dialog.findViewById(R.id.sort_type_zero);
+        sortTypeOne = dialog.findViewById(R.id.sort_type_one);
+        sortTypeTwo = dialog.findViewById(R.id.sort_type_two);
+
+        sortTypeZero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortTextView.setText("نزدیک ترین");
+                sortIdSelected = "0";
+                getPlaceData();
+                dialog.dismiss();
+            }
+        });
+        sortTypeOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortTextView.setText("بهترین");
+                sortIdSelected = "1";
+                getPlaceData();
+                dialog.dismiss();
+            }
+        });
+        sortTypeTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sortTextView.setText("بهترین و نزدیک ترین");
+                sortIdSelected = "2";
+                getPlaceData();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
 }
