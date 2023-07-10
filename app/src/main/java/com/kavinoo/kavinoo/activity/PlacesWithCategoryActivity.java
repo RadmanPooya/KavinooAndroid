@@ -116,6 +116,7 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
 
     UserInfoManager userInfoManager;
 
+    CardView sortCardView;
     TextView sortTextView;
 
     List<String> sorting = new ArrayList<>();
@@ -193,7 +194,7 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
 
         sortingBottomSheetBuilder = new BottomSheet.Builder(PlacesWithCategoryActivity.this, R.style.BottomSheet);
         sortingBottomSheetBuilder.setTitleColor(Color.parseColor("#367ab9"));
-        //sortingBottomSheetBuilder.setBackgroundColor(Color.parseColor("#367ab9"));
+
         sortingBottomSheetBuilder.addItem(0, "نزدیک ترین");
         sortingBottomSheetBuilder.addItem(1, "بهترین");
         sortingBottomSheetBuilder.addItem(2, "بهترین و نزدیک ترین");
@@ -285,6 +286,7 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
         filterPlaceCategoryCardView = findViewById(R.id.filter_place_category_card_view);
         searchPlaceWithCategory = findViewById(R.id.search_place_with_category);
         voiceSearchPlacesCatActivty = findViewById(R.id.voice_search_places_cat_activty);
+        sortCardView = findViewById(R.id.sort_card_view);
         sortTextView = findViewById(R.id.sort_text_view);
 
     }
@@ -346,7 +348,7 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
             }
         });
 
-        sortTextView.setOnClickListener(new View.OnClickListener() {
+        sortCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet categoryBottomSheet = sortingBottomSheetBuilder.create();

@@ -113,6 +113,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
 
     UserInfoManager userInfoManager;
 
+    CardView sortCardView;
     TextView sortTextView;
 
     List<String> sorting = new ArrayList<>();
@@ -280,6 +281,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
         filterPlaceCategoryCardView = findViewById(R.id.filter_place_category_card_view);
         searchPlaceWithCategory = findViewById(R.id.search_place_with_category);
         voiceSearchPlacesCatActivty = findViewById(R.id.voice_search_places_cat_activty);
+        sortCardView = findViewById(R.id.sort_card_view);
         sortTextView = findViewById(R.id.sort_text_view);
         showInLocation=findViewById(R.id.show_in_location);
 
@@ -351,7 +353,7 @@ public class SearchPlaceActivity extends AppCompatActivity implements FilterFaci
             }
         });
 
-        sortTextView.setOnClickListener(new View.OnClickListener() {
+        sortCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheet categoryBottomSheet = sortingBottomSheetBuilder.create();
