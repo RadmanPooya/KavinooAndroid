@@ -36,7 +36,7 @@
             android:textSize="@dimen/_14ssp"
             android:textColor="#033550"
             android:maxLines="1"
-            android:layout_marginEnd="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
