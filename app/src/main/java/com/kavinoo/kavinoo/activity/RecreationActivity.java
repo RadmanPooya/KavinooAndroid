@@ -3,9 +3,11 @@ package com.kavinoo.kavinoo.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -15,6 +17,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
@@ -23,6 +27,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kavinoo.App;
@@ -50,6 +55,11 @@ public class RecreationActivity extends AppCompatActivity {
     CardView menuToolbar;
     ConstraintLayout toolbarMain;
 
+    RecyclerView recyclerPlaces;
+    RecyclerView.Adapter adapterPlaces;
+    RecyclerView.LayoutManager layoutManagerPlaces;
+    ShimmerFrameLayout shimmerPlaceList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +70,9 @@ public class RecreationActivity extends AppCompatActivity {
         toolbarMain=findViewById(R.id.toolbar_main);
         menuToolbar=toolbarMain.findViewById(R.id.menu_toolbar);
         kavinooProfile=toolbarMain.findViewById(R.id.kavinoo_profile);
+
+        shimmerPlaceList = findViewById(R.id.shimmer_place_list);
+        recyclerPlaces = findViewById(R.id.recycler_places_with_category);
 
         menuToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,32 +106,20 @@ public class RecreationActivity extends AppCompatActivity {
 
                 placesItemList = placesResponse.getPlaces();
 
+                adapterPlaces = new PlacesListAdapter(placesItemList, RecreationActivity.this);
+                recyclerPlaces.setAdapter(adapterPlaces);
+                layoutManagerPlaces = new LinearLayoutManager(RecreationActivity.this);
+                recyclerPlaces.setLayoutManager(layoutManagerPlaces);
+                recyclerPlaces.setHasFixedSize(true);
+                adapterPlaces.notifyDataSetChanged();
 
-                PlacesListAdapterVip adapterPlaces = new PlacesListAdapterVip(placesItemList, RecreationActivity.this);
-                
-                viewPager.setAdapter(adapterPlaces);
-                viewPager.setClipToPadding(false);
-                viewPager.setClipChildren(false);
-                viewPager.setOffscreenPageLimit(5);
-                viewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-                if(placesItemList.size()>=2){
-                    viewPager.setCurrentItem(1);
-                }
+                Animation animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+                Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
 
-                Log.i("REEC",placesItemList.toString());
-                Log.i("REEC"," is heeeeeeeereeeeee");
-                CompositePageTransformer compositePageTransformer=new CompositePageTransformer();
-                compositePageTransformer.addTransformer(new MarginPageTransformer(1));
-                compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
-                    @Override
-                    public void transformPage(@NonNull View page, float position) {
-                        float r=1-Math.abs(position);
-                        page.setScaleY(0.72f+r*0.28f);
-                        page.setScaleX(0.72f+r*0.28f);
-                    }
-                });
-
-                viewPager.setPageTransformer(compositePageTransformer);
+                shimmerPlaceList.startAnimation(animFadeOut);
+                shimmerPlaceList.setVisibility(View.GONE);
+                recyclerPlaces.setVisibility(View.VISIBLE);
+                recyclerPlaces.startAnimation(animFadeIn);
 
             }
         }, new Response.ErrorListener() {
