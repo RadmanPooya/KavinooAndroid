@@ -50,7 +50,6 @@ public class CategoryAdapterMain extends RecyclerView.Adapter<CategoryAdapterMai
 
             Picasso.with(context).load(categoriesItemArrayList.get(position).getCategoryImage()).fit().into(holder.categoryItemMainImageView);
             holder.categoryItemMainTextView.setText(categoriesItemArrayList.get(position).getCategoryTitle());
-            AppUtils.logi(categoriesItemArrayList.get(position).getCategoryImage());
             holder.constraintMainCategory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
