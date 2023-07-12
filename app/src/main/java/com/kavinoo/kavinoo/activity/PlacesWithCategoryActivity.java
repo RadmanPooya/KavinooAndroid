@@ -572,8 +572,6 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
     }
 
     public void getPlaceDataTwo(String pageNumber) {
-        totalPlacesCounts.setVisibility(View.INVISIBLE);
-        totalPlacesCounts.startAnimation(animFadeOut);
         final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE+"?page="+pageNumber, new Response.Listener<String>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -590,9 +588,6 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
                 placesItemList.addAll(placesResponse.getPlaces());
                 adapterPlaces.notifyDataSetChanged();
 
-                totalPlacesCounts.setVisibility(View.VISIBLE);
-                totalPlacesCounts.startAnimation(animFadeIn);
-                totalPlacesCounts.setText("تعداد نتایج : "+placesResponse.getMeta().getTotal()+" مکان");
 
             }
         }, new Response.ErrorListener() {
@@ -643,8 +638,6 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
     }
 
     public void getAllPlaceDataTwo(String pageNumber) {
-        totalPlacesCounts.setVisibility(View.INVISIBLE);
-        totalPlacesCounts.startAnimation(animFadeOut);
         final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE+"?page="+pageNumber, new Response.Listener<String>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -661,9 +654,6 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
                 placesItemList.addAll(placesResponse.getPlaces());
                 adapterPlaces.notifyDataSetChanged();
 
-                totalPlacesCounts.setVisibility(View.VISIBLE);
-                totalPlacesCounts.startAnimation(animFadeIn);
-                totalPlacesCounts.setText("تعداد نتایج : "+placesResponse.getMeta().getTotal()+" مکان");
 
             }
         }, new Response.ErrorListener() {
