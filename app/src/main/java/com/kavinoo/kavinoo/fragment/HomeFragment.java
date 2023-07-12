@@ -1,12 +1,17 @@
 package com.kavinoo.kavinoo.fragment;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -16,6 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -35,6 +44,7 @@ import com.kavinoo.kavinoo.R;
 import com.kavinoo.kavinoo.activity.DiscountActivity;
 import com.kavinoo.kavinoo.activity.MenuActivity;
 import com.kavinoo.kavinoo.activity.OfferActivity;
+import com.kavinoo.kavinoo.activity.PlacesWithCategoryActivity;
 import com.kavinoo.kavinoo.activity.ProfileActivity;
 import com.kavinoo.kavinoo.activity.RecreationActivity;
 import com.kavinoo.kavinoo.activity.SearchPlaceActivity;
@@ -44,6 +54,8 @@ import com.kavinoo.kavinoo.localdata.viewmodel.CategoryViewModel;
 import com.kavinoo.kavinoo.onlinedata.adapter.SliderAdapter;
 import com.kavinoo.kavinoo.onlinedata.model.slider.SlidesResponse;
 import com.kavinoo.kavinoo.onlinedata.viewmodel.SliderViewModel;
+
+import org.aviran.cookiebar2.CookieBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +83,22 @@ public class HomeFragment extends Fragment {
 
     CardView profileImage;
     CardView menu;
+
+    ImageView voiceSearchPlacesCatActivty;
+
+    //start voice
+
+    public static final Integer RecordAudioRequestCode = 1;
+
+    private SpeechRecognizer speechRecognizer;
+
+    Intent speechRecognizerIntent;
+
+    boolean performingSpeechSetup;
+
+    boolean voiceClicked = false;
+
+    //end voice
 
     public HomeFragment(String title) {
         // Required empty public constructor
@@ -100,6 +128,7 @@ public class HomeFragment extends Fragment {
         discount=view.findViewById(R.id.discount);
         profileImage=view.findViewById(R.id.profile_image);
         menu=view.findViewById(R.id.menu);
+        voiceSearchPlacesCatActivty=view.findViewById(R.id.voice_search_places_cat_activty);
 
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +150,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity().getApplicationContext(), SearchPlaceActivity.class);
+                intent.putExtra("voice_word","");
                 ActivityOptionsCompat optionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),materialCardViewHomeSearch,ViewCompat.getTransitionName(materialCardViewHomeSearch));
                 startActivity(intent,optionsCompat.toBundle());
             }
@@ -186,11 +216,12 @@ public class HomeFragment extends Fragment {
             public void onChanged(List<CategoriesItem> categoryModels) {
                 ArrayList<CategoriesItem> categoryModelArrayListConvert=new ArrayList<>();
                 for(int i=0;i<categoryModels.size();i++){
-                    if(categoryModels.get(i).getParentId()==0){
+                    if(categoryModels.get(i).getParentId()==0 && categoryModelArrayListConvert.size()<=6){
                         categoryModelArrayListConvert.add(categoryModels.get(i));
                     }
                 }
 
+                Log.i("couuuuuuuuuu",categoryModelArrayListConvert.size()+" issssss");
 
                 adapter=new CategoryAdapterHome(categoryModelArrayListConvert,getActivity().getApplicationContext());
                 recyclerHomeCategory.setAdapter(adapter);
@@ -221,6 +252,134 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity().getApplicationContext());
+
+        speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fa");
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
+
+        //extra test
+        speechRecognizerIntent.putExtra("android.speech.extra.DICTATION_MODE", true);
+        speechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+        //end
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle bundle) {
+                performingSpeechSetup = false;
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+
+            }
+
+            @Override
+            public void onRmsChanged(float v) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] bytes) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+
+            }
+
+            @Override
+            public void onError(int i) {
+                if (i == SpeechRecognizer.ERROR_NO_MATCH) {
+                    CookieBar.Builder c = CookieBar.build(getActivity());
+                    c.setTitle(" خطا در شناسایی کلمات - لطفا دوباره امتحان کنید");
+                    c.setSwipeToDismiss(true);
+                    c.setDuration(3500);
+                    c.setCookiePosition(CookieBar.BOTTOM); // Cookie will be displayed at the bottom
+                    ViewCompat.setLayoutDirection(c.show().getView(), ViewCompat.LAYOUT_DIRECTION_RTL);
+                    voiceSearchPlacesCatActivty.callOnClick();
+                } else {
+                    return;
+                }
+                voiceSearchPlacesCatActivty.setImageResource(R.drawable.searchwithvoice);
+            }
+
+            @Override
+            public void onResults(Bundle bundle) {
+
+                ArrayList<String> data = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+                Intent intent=new Intent(getActivity().getApplicationContext(), SearchPlaceActivity.class);
+                intent.putExtra("voice_word",data.get(0));
+                ActivityOptionsCompat optionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),materialCardViewHomeSearch,ViewCompat.getTransitionName(materialCardViewHomeSearch));
+                startActivity(intent,optionsCompat.toBundle());
+
+                /*word = data.get(0);
+                searchPlaceWithCategory.setText(data.get(0));
+                getPlaceData();*/
+
+                voiceSearchPlacesCatActivty.setImageResource(R.drawable.searchwithvoice);
+                voiceSearchPlacesCatActivty.callOnClick();
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onEvent(int i, Bundle bundle) {
+
+            }
+        });
+
+        voiceSearchPlacesCatActivty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                    checkPermission();
+                }else if (voiceClicked) {
+                    performingSpeechSetup = false;
+                    voiceSearchPlacesCatActivty.setImageResource(R.drawable.searchwithvoice);
+                    speechRecognizer.stopListening();
+                    voiceClicked = false;
+
+                } else {
+                    voiceClicked = true;
+                    voiceSearchPlacesCatActivty.setImageResource(R.drawable.recordvoice);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            openVoiceSearch();
+                        }
+                    }, 300);
+
+
+                }
+
+
+            }
+        });
+
+
+    }
+
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO}, RecordAudioRequestCode);
+        }
+    }
+
+    public void openVoiceSearch() {
+
+        performingSpeechSetup = true;
+
+        speechRecognizer.startListening(speechRecognizerIntent);
 
     }
 

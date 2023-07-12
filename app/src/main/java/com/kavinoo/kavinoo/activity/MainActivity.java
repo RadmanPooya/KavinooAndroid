@@ -177,13 +177,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+        try {
+            if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
-            getLoc();
+                getLoc();
 
-        } else {
+            } else {
+
+            }
+        }catch (Exception e){
 
         }
+
     }
 
 
