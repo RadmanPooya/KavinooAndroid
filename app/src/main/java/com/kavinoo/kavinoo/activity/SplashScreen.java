@@ -106,9 +106,9 @@ public class SplashScreen extends AppCompatActivity {
 
         logoLocationImageView.startAnimation(animZoomLocation);
 
-        towerImageView.setVisibility(View.VISIBLE);
+        /*towerImageView.setVisibility(View.VISIBLE);
         Animation bottomToTopFade = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.enter_bottom_to_top);
-        towerImageView.startAnimation(bottomToTopFade);
+        towerImageView.startAnimation(bottomToTopFade);*/
 
         final Runnable[] runnableLogo = {null};
 
