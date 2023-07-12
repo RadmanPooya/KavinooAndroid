@@ -198,7 +198,7 @@
         android:layout_marginEnd="@dimen/_15sdp"
         android:maxLines="1"
         android:visibility="invisible"
-        android:text="تعداد نتایج : 24 مکان"
+        android:text=""
         android:textColor="#83929A"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
