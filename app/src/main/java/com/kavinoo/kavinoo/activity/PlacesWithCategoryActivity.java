@@ -137,6 +137,8 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
     boolean isAll=true;
 
     TextView totalPlacesCounts;
+    Animation animFadeOut;
+    Animation animFadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +150,11 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
         toolbarMain=findViewById(R.id.toolbar_main);
         menuToolbar=toolbarMain.findViewById(R.id.menu_toolbar);
         kavinooProfile=toolbarMain.findViewById(R.id.kavinoo_profile);
-        totalPlacesCounts=toolbarMain.findViewById(R.id.total_places_counts);
+        totalPlacesCounts=findViewById(R.id.total_places_counts);
+
+        animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+        animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+
 
         menuToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -416,6 +422,8 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
     }
 
     public void getAllPlaceData() {
+        totalPlacesCounts.setVisibility(View.INVISIBLE);
+        totalPlacesCounts.startAnimation(animFadeOut);
         isAll = true;
         final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE, new Response.Listener<String>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -441,14 +449,13 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
                 recyclerPlaces.setHasFixedSize(true);
                 adapterPlaces.notifyDataSetChanged();
 
-                Animation animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
-                Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-
                 shimmerPlaceList.startAnimation(animFadeOut);
                 shimmerPlaceList.setVisibility(View.GONE);
                 recyclerPlaces.setVisibility(View.VISIBLE);
                 recyclerPlaces.startAnimation(animFadeIn);
 
+                totalPlacesCounts.setVisibility(View.VISIBLE);
+                totalPlacesCounts.startAnimation(animFadeIn);
                 totalPlacesCounts.setText("تعداد نتایج : "+placesResponse.getMeta().getTotal()+" مکان");
 
 
@@ -480,6 +487,8 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
     }
 
     public void getPlaceData() {
+        totalPlacesCounts.setVisibility(View.INVISIBLE);
+        totalPlacesCounts.startAnimation(animFadeOut);
         isAll = false;
         final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE, new Response.Listener<String>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -504,14 +513,13 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
                 recyclerPlaces.setHasFixedSize(true);
                 adapterPlaces.notifyDataSetChanged();
 
-                Animation animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
-                Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-
                 shimmerPlaceList.startAnimation(animFadeOut);
                 shimmerPlaceList.setVisibility(View.GONE);
                 recyclerPlaces.setVisibility(View.VISIBLE);
                 recyclerPlaces.startAnimation(animFadeIn);
 
+                totalPlacesCounts.setVisibility(View.VISIBLE);
+                totalPlacesCounts.startAnimation(animFadeIn);
                 totalPlacesCounts.setText("تعداد نتایج : "+placesResponse.getMeta().getTotal()+" مکان");
 
 
@@ -564,6 +572,8 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
     }
 
     public void getPlaceDataTwo(String pageNumber) {
+        totalPlacesCounts.setVisibility(View.INVISIBLE);
+        totalPlacesCounts.startAnimation(animFadeOut);
         final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE+"?page="+pageNumber, new Response.Listener<String>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -580,6 +590,8 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
                 placesItemList.addAll(placesResponse.getPlaces());
                 adapterPlaces.notifyDataSetChanged();
 
+                totalPlacesCounts.setVisibility(View.VISIBLE);
+                totalPlacesCounts.startAnimation(animFadeIn);
                 totalPlacesCounts.setText("تعداد نتایج : "+placesResponse.getMeta().getTotal()+" مکان");
 
             }
@@ -631,6 +643,8 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
     }
 
     public void getAllPlaceDataTwo(String pageNumber) {
+        totalPlacesCounts.setVisibility(View.INVISIBLE);
+        totalPlacesCounts.startAnimation(animFadeOut);
         final StringRequest placeReq = new StringRequest(Request.Method.POST, KavinooLinks.SEARCH_PLACE+"?page="+pageNumber, new Response.Listener<String>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -647,20 +661,9 @@ public class PlacesWithCategoryActivity extends AppCompatActivity implements Fil
                 placesItemList.addAll(placesResponse.getPlaces());
                 adapterPlaces.notifyDataSetChanged();
 
-                /*adapterPlaces = new PlacesListAdapter(placesItemList, SearchPlaceActivity.this);
-                recyclerPlaces.setAdapter(adapterPlaces);
-                layoutManagerPlaces = new LinearLayoutManager(SearchPlaceActivity.this);
-                recyclerPlaces.setLayoutManager(layoutManagerPlaces);
-                recyclerPlaces.setHasFixedSize(true);
-                adapterPlaces.notifyDataSetChanged();
-
-                Animation animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
-                Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-
-                shimmerPlaceList.startAnimation(animFadeOut);
-                shimmerPlaceList.setVisibility(View.GONE);
-                recyclerPlaces.setVisibility(View.VISIBLE);
-                recyclerPlaces.startAnimation(animFadeIn);*/
+                totalPlacesCounts.setVisibility(View.VISIBLE);
+                totalPlacesCounts.startAnimation(animFadeIn);
+                totalPlacesCounts.setText("تعداد نتایج : "+placesResponse.getMeta().getTotal()+" مکان");
 
             }
         }, new Response.ErrorListener() {
