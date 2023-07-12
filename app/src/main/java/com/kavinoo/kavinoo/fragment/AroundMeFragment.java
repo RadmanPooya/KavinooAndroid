@@ -4,10 +4,13 @@ import static com.mapbox.mapboxsdk.style.layers.Property.ICON_ROTATION_ALIGNMENT
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +34,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
@@ -50,6 +54,7 @@ import com.google.gson.Gson;
 import com.kavinoo.App;
 import com.kavinoo.kavinoo.R;
 import com.kavinoo.kavinoo.activity.PlaceActivity;
+import com.kavinoo.kavinoo.activity.SearchPlaceActivity;
 import com.kavinoo.kavinoo.onlinedata.links.KavinooLinks;
 import com.kavinoo.kavinoo.onlinedata.model.place.placelist.PlacesItem;
 import com.kavinoo.kavinoo.onlinedata.model.place.placelist.PlacesResponse;
@@ -118,10 +123,8 @@ public class AroundMeFragment extends Fragment {
     boolean voiceClicked = false;
 
 
-
-
     //end
-    
+
 
     List<PlacesItem> placesItemList = new ArrayList<>();
     AppCompatEditText searchPlaceAroundMe;
@@ -133,6 +136,11 @@ public class AroundMeFragment extends Fragment {
 
     UserInfoManager userInfoManager;
     LatLng latLngDefault;
+
+    CardView distanceCardView;
+
+    TextView distanceSelectedTextView;
+    String distanceSelected = "500";
 
 
     public AroundMeFragment() {
@@ -155,37 +163,35 @@ public class AroundMeFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
         View view = inflater.inflate(R.layout.fragment_around_me, container, false);
-        
+
 
         return view;
     }
-
-
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        constraintPlaceAroundMe=view.findViewById(R.id.constraint_place_around_me);
-        headerImagePlaceListImageView=view.findViewById(R.id.header_image_place_list);
-        titlePlaceListTextView=view.findViewById(R.id.title_place_list);
-        distancePlaceListTextView=view.findViewById(R.id.distance_place_list);
-        addressPlaceListTextView=view.findViewById(R.id.address_place_list);
-        visitCountPlaceListTextView=view.findViewById(R.id.visit_count_place_list);
-        commentCountPlaceListTextView=view.findViewById(R.id.comment_count_place_list);
-        favoriteCountPlaceListTextView=view.findViewById(R.id.favorite_count_place_list);
-        placeItemBorderCardView=view.findViewById(R.id.place_item_border_card_view);
-        rateImageView=view.findViewById(R.id.rate_image_view);
-
-        voiceSearchCatFr=view.findViewById(R.id.voice_search_cat_fr);
+        constraintPlaceAroundMe = view.findViewById(R.id.constraint_place_around_me);
+        headerImagePlaceListImageView = view.findViewById(R.id.header_image_place_list);
+        titlePlaceListTextView = view.findViewById(R.id.title_place_list);
+        distancePlaceListTextView = view.findViewById(R.id.distance_place_list);
+        addressPlaceListTextView = view.findViewById(R.id.address_place_list);
+        visitCountPlaceListTextView = view.findViewById(R.id.visit_count_place_list);
+        commentCountPlaceListTextView = view.findViewById(R.id.comment_count_place_list);
+        favoriteCountPlaceListTextView = view.findViewById(R.id.favorite_count_place_list);
+        placeItemBorderCardView = view.findViewById(R.id.place_item_border_card_view);
+        rateImageView = view.findViewById(R.id.rate_image_view);
+        voiceSearchCatFr = view.findViewById(R.id.voice_search_cat_fr);
+        distanceSelectedTextView = view.findViewById(R.id.distance_selected_text_view);
+        distanceCardView = view.findViewById(R.id.distance_card_view);
 
 
         aniZoomIn = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.zoom_in_two);
@@ -316,7 +322,7 @@ public class AroundMeFragment extends Fragment {
 
                 if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                     checkPermission();
-                }else if (voiceClicked) {
+                } else if (voiceClicked) {
                     performingSpeechSetup = false;
                     voiceSearchCatFr.setImageResource(R.drawable.searchwithvoice);
                     speechRecognizer.stopListening();
@@ -337,6 +343,12 @@ public class AroundMeFragment extends Fragment {
             }
         });
 
+        distanceCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDistanceDialog();
+            }
+        });
 
     }
 
@@ -358,42 +370,42 @@ public class AroundMeFragment extends Fragment {
 
                 Picasso.with(myContext).load(placesItem.getHeaderImage()).fit().into(headerImagePlaceListImageView);
                 titlePlaceListTextView.setText(placesItem.getTitle());
-                double distance=placesItem.getDistance();
-                String distanceText="";
-                if(distance>=1000){
-                    double dm=distance/1000;
-                    int d=(int)dm;
-                    distanceText=d+" کیلومتری شما";
-                }else {
-                    int d=(int)distance;
-                    distanceText=d+" متری شما";
+                double distance = placesItem.getDistance();
+                String distanceText = "";
+                if (distance >= 1000) {
+                    double dm = distance / 1000;
+                    int d = (int) dm;
+                    distanceText = d + " کیلومتری شما";
+                } else {
+                    int d = (int) distance;
+                    distanceText = d + " متری شما";
                 }
                 distancePlaceListTextView.setText(distanceText);
 
-                Log.i("FACILI","adapter list : "+placesItemList.toString());
+                Log.i("FACILI", "adapter list : " + placesItemList.toString());
 
                 addressPlaceListTextView.setText(placesItem.getAddress());
                 visitCountPlaceListTextView.setText(String.valueOf(placesItem.getVisitCount()));
                 commentCountPlaceListTextView.setText(String.valueOf(placesItem.getCommentsCount()));
                 favoriteCountPlaceListTextView.setText(String.valueOf(placesItem.getFavoriteCount()));
 
-                int rondRate=(int)placesItem.getRate();
-                if(rondRate==0){
+                int rondRate = (int) placesItem.getRate();
+                if (rondRate == 0) {
                     rateImageView.setImageResource(R.drawable.rate0);
                 }
-                if(rondRate==1){
+                if (rondRate == 1) {
                     rateImageView.setImageResource(R.drawable.rate1);
                 }
-                if(rondRate==2){
+                if (rondRate == 2) {
                     rateImageView.setImageResource(R.drawable.rate2);
                 }
-                if(rondRate==3){
+                if (rondRate == 3) {
                     rateImageView.setImageResource(R.drawable.rate3);
                 }
-                if(rondRate==4){
+                if (rondRate == 4) {
                     rateImageView.setImageResource(R.drawable.rate4);
                 }
-                if(rondRate==5){
+                if (rondRate == 5) {
                     rateImageView.setImageResource(R.drawable.rate5);
                 }
 
@@ -401,8 +413,8 @@ public class AroundMeFragment extends Fragment {
                 placeItemBorderCardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(myContext, PlaceActivity.class);
-                        intent.putExtra("idPlace",placesItem.getId());
+                        Intent intent = new Intent(myContext, PlaceActivity.class);
+                        intent.putExtra("idPlace", placesItem.getId());
                         intent.putExtra("distance", finalDistanceText);
                         myContext.startActivity(intent);
                     }
@@ -427,7 +439,7 @@ public class AroundMeFragment extends Fragment {
         //
         int valueInPixels = (int) myContext.getResources().getDimension(R.dimen._100sdp);
 
-        float textTabSize= (float) (valueInPixels/540f);
+        float textTabSize = (float) (valueInPixels / 540f);
 
         sampleSymbolOptions.withIconSize(textTabSize);
         // save created Symbol Object for later access
@@ -449,10 +461,11 @@ public class AroundMeFragment extends Fragment {
             @Override
             public void onResponse(final String response) {
 
-                if(word.equals("")){
-                    placesItemList.clear();
+                Log.i("SSSLLL",response.toString());
 
-                    Log.i("QQWW", response.toString());
+
+                if (word.equals("")) {
+                    placesItemList.clear();
 
                     Gson gson = new Gson();
 
@@ -462,7 +475,7 @@ public class AroundMeFragment extends Fragment {
 
                     new MyTask().execute(placesItemList);
 
-                }else{
+                } else {
                     mapView.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(@NonNull MapboxMap mapboxMap) {
@@ -495,7 +508,6 @@ public class AroundMeFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
 
-
             }
         }
         ) {
@@ -507,9 +519,9 @@ public class AroundMeFragment extends Fragment {
                 params.put("word", word);
                 params.put("lat", userInfoManager.getLat());
                 params.put("lon", userInfoManager.getLon());
+                params.put("distance", distanceSelected);
 
-                params.put("distance", "4444444");
-
+                Log.i("SSSLLL",params.toString());
                 return params;
             }
         };
@@ -518,7 +530,6 @@ public class AroundMeFragment extends Fragment {
         App.getInstance().addToRequestQueue(placeReq, "AROUNDREQ");
 
     }
-
 
 
     private class MyTask extends AsyncTask<List<PlacesItem>, Void, List<LatLng>> {
@@ -558,13 +569,18 @@ public class AroundMeFragment extends Fragment {
         protected void onPostExecute(List<Bitmap> bitmaps) {
             super.onPostExecute(bitmaps);
 
+            try {
+                for (int i = 0; i < bitmaps.size(); i++) {
 
-            for (int i = 0; i < bitmaps.size(); i++) {
+                    addSymbolToMap(latLngList.get(i), bitmaps.get(i), placesItemList.get(i));
 
-                addSymbolToMap(latLngList.get(i), bitmaps.get(i),placesItemList.get(i));
+                }
+                zoomToSpecificLocation(latLngList.get(0));
+            }catch (Exception e){
 
             }
-            zoomToSpecificLocation(latLngList.get(0));
+
+
 
         }
 
@@ -599,7 +615,6 @@ public class AroundMeFragment extends Fragment {
     }
 
 
-
     public void openVoiceSearch() {
 
         performingSpeechSetup = true;
@@ -609,17 +624,18 @@ public class AroundMeFragment extends Fragment {
     }
 
 
-
     @Override
     public void onStart() {
         super.onStart();
         mapView.onStart();
     }
+
     @Override
     public void onResume() {
         super.onResume();
 
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -627,6 +643,7 @@ public class AroundMeFragment extends Fragment {
         speechRecognizer.destroy();
 
     }
+
     @Override
     public void onStop() {
         super.onStop();
@@ -634,6 +651,7 @@ public class AroundMeFragment extends Fragment {
         speechRecognizer.destroy();
 
     }
+
     @Override
     public void onLowMemory() {
         super.onLowMemory();
@@ -648,6 +666,129 @@ public class AroundMeFragment extends Fragment {
 
     }
 
+
+    public void showDistanceDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.distance_places_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        CardView distanceValue100;
+        CardView distanceValue200;
+        CardView distanceValue500;
+        CardView distanceValue800;
+        CardView distanceValue1000;
+        CardView distanceValue2000;
+        CardView distanceValue5000;
+        CardView distanceValue8000;
+        CardView distanceValue10000;
+        CardView distanceValue20000;
+
+        distanceValue100 = dialog.findViewById(R.id.distance_value_100);
+        distanceValue200 = dialog.findViewById(R.id.distance_value_200);
+        distanceValue500 = dialog.findViewById(R.id.distance_value_500);
+        distanceValue800 = dialog.findViewById(R.id.distance_value_800);
+        distanceValue1000 = dialog.findViewById(R.id.distance_value_1000);
+        distanceValue2000 = dialog.findViewById(R.id.distance_value_2000);
+        distanceValue5000 = dialog.findViewById(R.id.distance_value_5000);
+        distanceValue8000 = dialog.findViewById(R.id.distance_value_8000);
+        distanceValue10000 = dialog.findViewById(R.id.distance_value_10000);
+        distanceValue20000 = dialog.findViewById(R.id.distance_value_20000);
+
+        distanceValue100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("100 متر");
+                distanceSelected = "100";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue200.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("200 متر");
+                distanceSelected = "200";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue500.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("500 متر");
+                distanceSelected = "500";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue800.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("800 متر");
+                distanceSelected = "800";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue1000.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("1 کیلومتر");
+                distanceSelected = "1000";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue2000.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("2 کیلومتر");
+                distanceSelected = "2000";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue5000.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("5 کیلومتر");
+                distanceSelected = "5000";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue8000.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("8 کیلومتر");
+                distanceSelected = "8000";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue10000.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("10 کیلومتر");
+                distanceSelected = "10000";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        distanceValue20000.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                distanceSelectedTextView.setText("20 کیلومتر");
+                distanceSelected = "20000";
+                getPlaceData(searchPlaceAroundMe.getText().toString());
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
 
 
     private void checkPermission() {

@@ -77,24 +77,81 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.ramotion.fluidslider.FluidSlider
-            android:id="@+id/fluidSlider"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:elevation="@dimen/_10sdp"
-            style="@style/iransansbold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            mapbox:layout_constraintTop_toBottomOf="@+id/material_card_view_cat_fr"
-            app:size="small"
-            mapbox:bubble_color="@color/colorBlue"
-            mapbox:bar_color="@color/myColorWhite"
-            mapbox:bar_text_color="@color/colorBlue"
-            mapbox:bubble_text_color="@color/myColorWhite"
-            app:duration="@android:integer/config_mediumAnimTime"
-            tools:targetApi="lollipop" />
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_weight="0.6"
+            android:background="#FFFFFF"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            mapbox:layout_constraintTop_toBottomOf="@+id/material_card_view_cat_fr">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/distance_card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+
+                        <TextView
+                            android:id="@+id/distance_selected_text_view"
+                            style="@style/iransansregular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/_7sdp"
+                            android:ellipsize="end"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:text="500 متر"
+                            android:textColor="#0c7ab1"
+                            android:textSize="@dimen/_14ssp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    style="@style/iransansregular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:maxLines="1"
+                    android:text="شعاع جستجو مکان ها"
+                    android:textColor="#b2c6d4"
+                    android:textSize="@dimen/_11ssp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:src="@drawable/aroundmeplacemainicon" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
 
         <ImageView
             android:id="@+id/imageView7"

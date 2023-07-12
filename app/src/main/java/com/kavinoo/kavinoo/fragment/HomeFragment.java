@@ -394,11 +394,19 @@ public class HomeFragment extends Fragment {
     public void onStop() {
         super.onStop();
         sliderHandler.removeCallbacks(slideRunnable);
+        speechRecognizer.destroy();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        speechRecognizer.destroy();
 
     }
 }
