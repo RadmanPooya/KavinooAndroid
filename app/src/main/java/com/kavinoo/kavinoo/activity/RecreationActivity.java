@@ -37,6 +37,7 @@ import com.kavinoo.kavinoo.onlinedata.adapter.PlacesListAdapterVip;
 import com.kavinoo.kavinoo.onlinedata.links.KavinooLinks;
 import com.kavinoo.kavinoo.onlinedata.model.place.placelist.PlacesItem;
 import com.kavinoo.kavinoo.onlinedata.model.place.placelist.PlacesResponse;
+import com.kavinoo.kavinoo.utils.UserInfoManager;
 
 import org.aviran.cookiebar2.CookieBar;
 
@@ -60,11 +61,15 @@ public class RecreationActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManagerPlaces;
     ShimmerFrameLayout shimmerPlaceList;
 
+    UserInfoManager userInfoManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recreation);
+
+        userInfoManager = new UserInfoManager(RecreationActivity.this);
 
         viewPager=findViewById(R.id.view_pager);
         toolbarMain=findViewById(R.id.toolbar_main);
@@ -96,7 +101,7 @@ public class RecreationActivity extends AppCompatActivity {
 
     public void getRecreationPlaces(){
         String url= KavinooLinks.GET_RECREATION_PLACES;
-        final StringRequest recreationReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        final StringRequest recreationReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -131,7 +136,16 @@ public class RecreationActivity extends AppCompatActivity {
                 c.setCookiePosition(CookieBar.BOTTOM); // Cookie will be displayed at the bottom
                 ViewCompat.setLayoutDirection(c.show().getView(), ViewCompat.LAYOUT_DIRECTION_RTL);
             }
-        });
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("lat", userInfoManager.getLat());
+                params.put("lon", userInfoManager.getLon());
+                return params;
+            }
+        };
 
         recreationReq.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         App.getInstance().addToRequestQueue(recreationReq, "RECREATIONReq");

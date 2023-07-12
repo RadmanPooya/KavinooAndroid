@@ -1,6 +1,7 @@
 package com.kavinoo.kavinoo.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -33,11 +35,14 @@ import com.kavinoo.kavinoo.onlinedata.adapter.PlacesListAdapterVip;
 import com.kavinoo.kavinoo.onlinedata.links.KavinooLinks;
 import com.kavinoo.kavinoo.onlinedata.model.place.placelist.PlacesItem;
 import com.kavinoo.kavinoo.onlinedata.model.place.placelist.PlacesResponse;
+import com.kavinoo.kavinoo.utils.UserInfoManager;
 
 import org.aviran.cookiebar2.CookieBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OfferActivity extends AppCompatActivity {
 
@@ -54,10 +59,14 @@ public class OfferActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManagerPlaces;
     ShimmerFrameLayout shimmerPlaceList;
 
+    UserInfoManager userInfoManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer);
+
+        userInfoManager = new UserInfoManager(OfferActivity.this);
 
         viewPager=findViewById(R.id.view_pager);
 
@@ -88,7 +97,7 @@ public class OfferActivity extends AppCompatActivity {
 
     public void getOfferPlaces(){
         String url= KavinooLinks.GET_OFFER_PLACES;
-        final StringRequest recreationReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        final StringRequest recreationReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -123,7 +132,17 @@ public class OfferActivity extends AppCompatActivity {
                 c.setCookiePosition(CookieBar.BOTTOM); // Cookie will be displayed at the bottom
                 ViewCompat.setLayoutDirection(c.show().getView(), ViewCompat.LAYOUT_DIRECTION_RTL);
             }
-        });
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("lat", userInfoManager.getLat());
+                params.put("lon", userInfoManager.getLon());
+                return params;
+            }
+        };
 
         recreationReq.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         App.getInstance().addToRequestQueue(recreationReq, "RECREATIONReq");
