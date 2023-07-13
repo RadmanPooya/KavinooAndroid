@@ -547,10 +547,17 @@ public class ShowInMapActivity extends AppCompatActivity {
 
             for (int i = 0; i < lists[0].size(); i++) {
                 try {
-                    paths.add(lists[0].get(i).getCategory().getParent().getPinImage());
+                    String pinPath="";
+                    if(lists[0].get(i).getCategory().getPinImage() == null){
+                        pinPath = lists[0].get(i).getCategory().getParent().getPinImage();
+                    }else{
+                        pinPath = lists[0].get(i).getCategory().getPinImage();
+                    }
+
+                    paths.add(pinPath);
                     FutureTarget<Bitmap> futureBitmap = Glide.with(ShowInMapActivity.this)
                             .asBitmap()
-                            .load(lists[0].get(i).getCategory().getParent().getPinImage())
+                            .load(pinPath)
                             .submit();
                     Bitmap bitmapPin;
                     Bitmap myBitmap = futureBitmap.get();
