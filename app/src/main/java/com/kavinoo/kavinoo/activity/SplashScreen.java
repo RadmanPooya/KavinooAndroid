@@ -25,7 +25,6 @@ import com.kavinoo.App;
 import com.kavinoo.kavinoo.R;
 import com.kavinoo.kavinoo.localdata.model.category.CategoriesItem;
 import com.kavinoo.kavinoo.localdata.model.category.CategoriesResponse;
-import com.kavinoo.kavinoo.localdata.viewmodel.CategoryViewModel;
 import com.kavinoo.kavinoo.utils.UserInfoManager;
 
 import java.util.ArrayList;
@@ -43,8 +42,6 @@ public class SplashScreen extends AppCompatActivity {
     String secCategoryUrlReq;
     UserInfoManager userInfoManager;
 
-    private CategoryViewModel categoryViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,39 +52,7 @@ public class SplashScreen extends AppCompatActivity {
         categoryModelArrayList = new ArrayList<>();
         secCategoryModelArrayList = new ArrayList<>();
 
-        categoryViewModel = new ViewModelProviders().of(this).get(CategoryViewModel.class);
 
-        /*String strJson = AppUtils.loadJSONFromAsset(this, "categories");
-        Type listType = new TypeToken<List<CategoryModel>>() {
-        }.getType();
-        Gson gson = new Gson();
-        List<CategoryModel> categoryModels = gson.fromJson(strJson, listType);*/
-
-        Log.i("AAAA", "onnnn ccc");
-
-        categoryUrlReq = "https://kavinoo.com/api/categories";
-
-        final StringRequest categoryDetailsReq = new StringRequest(Request.Method.GET, categoryUrlReq, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-
-                Gson gson = new Gson();
-                CategoriesResponse categoriesResponse = gson.fromJson(response, CategoriesResponse.class);
-
-                List<CategoriesItem> categoriesItems = categoriesResponse.getCategories();
-                categoryViewModel.insert(categoriesItems);
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("AAAA", error.getMessage()+" ppppp");
-            }
-        });
-        categoryDetailsReq.setRetryPolicy(new DefaultRetryPolicy(6000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        App.getInstance().addToRequestQueue(categoryDetailsReq, "CATEGORYREQ");
 
         splashLogo = findViewById(R.id.splash_logo);
         towerImageView = findViewById(R.id.tower_image_view);

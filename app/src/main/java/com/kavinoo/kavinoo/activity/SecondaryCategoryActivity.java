@@ -46,6 +46,7 @@ import com.kavinoo.kavinoo.localdata.adapter.CategoryAdapterSecond;
 import com.kavinoo.kavinoo.localdata.model.category.CategoriesItem;
 import com.kavinoo.kavinoo.localdata.model.category.CategoriesResponse;
 import com.kavinoo.kavinoo.localdata.viewmodel.CategoryViewModel;
+import com.kavinoo.kavinoo.onlinedata.links.KavinooLinks;
 import com.squareup.picasso.Picasso;
 
 import org.aviran.cookiebar2.CookieBar;
@@ -57,10 +58,6 @@ import de.mrapp.android.bottomsheet.BottomSheet;
 
 public class SecondaryCategoryActivity extends AppCompatActivity {
 
-    String categoryUrlReq;
-
-
-    CategoryViewModel secondCategoryViewModel;
 
     RecyclerView recyclerMainSecCategory;
     CategoryAdapterSecond adapter;
@@ -257,8 +254,6 @@ public class SecondaryCategoryActivity extends AppCompatActivity {
         });
 
 
-        secondCategoryViewModel = new ViewModelProviders().of(this).get(CategoryViewModel.class);
-
         Intent intent = getIntent();
 
         catId = intent.getIntExtra("category_id", 0);
@@ -271,9 +266,7 @@ public class SecondaryCategoryActivity extends AppCompatActivity {
 
         searchSecondaryCategoryEditText.setHint("جستجو در دسته بندی " + catTitle + " ...");
 
-        categoryUrlReq = "https://kavinoo.com/api/categories/" + catId;
-
-        final StringRequest categoryDetailsReq = new StringRequest(Request.Method.GET, categoryUrlReq, new Response.Listener<String>() {
+        final StringRequest categoryDetailsReq = new StringRequest(Request.Method.GET, KavinooLinks.GET_SECONDARY_CATEGORY_LIST + catId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -282,7 +275,13 @@ public class SecondaryCategoryActivity extends AppCompatActivity {
                 CategoriesResponse categoriesResponse = gson.fromJson(response, CategoriesResponse.class);
 
                 List<CategoriesItem> categoriesItems = categoriesResponse.getCategories();
-                secondCategoryViewModel.insert(categoriesItems);
+
+                categoryModelArrayListConvert = (ArrayList<CategoriesItem>) categoriesItems;
+                adapter = new CategoryAdapterSecond(categoryModelArrayListConvert, SecondaryCategoryActivity.this,onClickSecondaryCategory);
+                recyclerMainSecCategory.setAdapter(adapter);
+                layoutManager = new LinearLayoutManager(SecondaryCategoryActivity.this);
+                recyclerMainSecCategory.setLayoutManager(layoutManager);
+                recyclerMainSecCategory.setHasFixedSize(true);
 
 
             }
@@ -296,20 +295,7 @@ public class SecondaryCategoryActivity extends AppCompatActivity {
         categoryDetailsReq.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         App.getInstance().addToRequestQueue(categoryDetailsReq, "CATEGORYSECREQ");
 
-        secondCategoryViewModel = new ViewModelProviders().of(this).get(CategoryViewModel.class);
 
-        secondCategoryViewModel.catWithParentId(String.valueOf(catId)).observe(this, new Observer<List<CategoriesItem>>() {
-            @Override
-            public void onChanged(List<CategoriesItem> categoriesItems) {
-
-                categoryModelArrayListConvert = (ArrayList<CategoriesItem>) categoriesItems;
-                adapter = new CategoryAdapterSecond(categoryModelArrayListConvert, SecondaryCategoryActivity.this,onClickSecondaryCategory);
-                recyclerMainSecCategory.setAdapter(adapter);
-                layoutManager = new LinearLayoutManager(SecondaryCategoryActivity.this);
-                recyclerMainSecCategory.setLayoutManager(layoutManager);
-                recyclerMainSecCategory.setHasFixedSize(true);
-            }
-        });
 
         searchSecondaryCategoryEditText.addTextChangedListener(new TextWatcher() {
             @Override

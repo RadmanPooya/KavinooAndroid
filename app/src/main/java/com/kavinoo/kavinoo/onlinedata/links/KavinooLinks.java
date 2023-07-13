@@ -24,6 +24,8 @@ public class KavinooLinks {
     public static final String ADD_ELAN ="https://kavinoo.com/api/updatePlaceFavoriteCount";
     public static final String SEARCH_PLACE ="https://kavinoo.com/api/searchPlace";
     public static final String SEARCH_PLACE_IN_MAP ="https://kavinoo.com/api/searchPlaces";
+    public static final String GET_CATEGORY_LIST ="https://kavinoo.com/api/categories";
+    public static final String GET_SECONDARY_CATEGORY_LIST ="https://kavinoo.com/api/categories/";
     public static final String ADD_PLACE_GENERAL ="https://kavinoo.com/api/addPlaceGeneral";
     public static final String ADD_PLACE_ADDRESSES ="https://kavinoo.com/api/addPlaceAddresses";
     public static final String UPDATE_PLACE_VISIT_COUNT ="https://kavinoo.com/api/updatePlaceVisitCount";

@@ -50,8 +50,10 @@ import com.kavinoo.kavinoo.activity.RecreationActivity;
 import com.kavinoo.kavinoo.activity.SearchPlaceActivity;
 import com.kavinoo.kavinoo.localdata.adapter.CategoryAdapterHome;
 import com.kavinoo.kavinoo.localdata.model.category.CategoriesItem;
+import com.kavinoo.kavinoo.localdata.model.category.CategoriesResponse;
 import com.kavinoo.kavinoo.localdata.viewmodel.CategoryViewModel;
 import com.kavinoo.kavinoo.onlinedata.adapter.SliderAdapter;
+import com.kavinoo.kavinoo.onlinedata.links.KavinooLinks;
 import com.kavinoo.kavinoo.onlinedata.model.slider.SlidesResponse;
 import com.kavinoo.kavinoo.onlinedata.viewmodel.SliderViewModel;
 
@@ -72,7 +74,6 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerHomeCategory;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
-    CategoryViewModel categoryViewModelHome;
 
     TextView searchPlaceHomeTextView;
     MaterialCardView materialCardViewHomeSearch;
@@ -192,44 +193,41 @@ public class HomeFragment extends Fragment {
         App.getInstance().addToRequestQueue(sliderDetailsReq, "SLIDERREQ");
 
 
-        /*sliderViewModel.getSliderListLData("https://kavinoo.com/api/slides").observe(this, new Observer<SlidesResponse>() {
-            @Override
-            public void onChanged(SlidesResponse slidesResponse) {
 
-                sliderAdapter=new SliderAdapter(slidesResponse.getSlider(),viewPagerSlider,getContext());
-                viewPagerSlider.setAdapter(sliderAdapter);
-                viewPagerSlider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                    @Override
-                    public void onPageSelected(int position) {
-                        super.onPageSelected(position);
-                        sliderHandler.removeCallbacks(slideRunnable);
-                        sliderHandler.postDelayed(slideRunnable,5000);
-                    }
-                });
-            }
-        });
-*/
-        categoryViewModelHome= new ViewModelProviders().of(this).get(CategoryViewModel.class);
 
-        categoryViewModelHome.all().observe(this, new Observer<List<CategoriesItem>>() {
+        final StringRequest categoryDetailsReq = new StringRequest(Request.Method.GET, KavinooLinks.GET_CATEGORY_LIST, new Response.Listener<String>() {
             @Override
-            public void onChanged(List<CategoriesItem> categoryModels) {
+            public void onResponse(String response) {
+
+                Gson gson = new Gson();
+                CategoriesResponse categoriesResponse = gson.fromJson(response, CategoriesResponse.class);
+
+                List<CategoriesItem> categoriesItems = categoriesResponse.getCategories();
+
                 ArrayList<CategoriesItem> categoryModelArrayListConvert=new ArrayList<>();
-                for(int i=0;i<categoryModels.size();i++){
-                    if(categoryModels.get(i).getParentId()==0 && categoryModelArrayListConvert.size()<=6){
-                        categoryModelArrayListConvert.add(categoryModels.get(i));
+                for(int i=0;i<categoriesItems.size();i++){
+                    if(categoriesItems.get(i).getParentId()==0 && categoryModelArrayListConvert.size()<=6){
+                        categoryModelArrayListConvert.add(categoriesItems.get(i));
                     }
                 }
-
-                Log.i("couuuuuuuuuu",categoryModelArrayListConvert.size()+" issssss");
 
                 adapter=new CategoryAdapterHome(categoryModelArrayListConvert,getActivity().getApplicationContext());
                 recyclerHomeCategory.setAdapter(adapter);
                 layoutManager=new GridLayoutManager(getActivity().getApplicationContext(),4);
                 recyclerHomeCategory.setLayoutManager(layoutManager);
                 recyclerHomeCategory.setHasFixedSize(true);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
         });
+        categoryDetailsReq.setRetryPolicy(new DefaultRetryPolicy(6000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        App.getInstance().addToRequestQueue(categoryDetailsReq, "CATEGORYREQ");
+
 
         recreation.setOnClickListener(new View.OnClickListener() {
             @Override

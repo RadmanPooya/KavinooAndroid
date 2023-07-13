@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,13 +37,23 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.kavinoo.App;
 import com.kavinoo.kavinoo.R;
 import com.kavinoo.kavinoo.activity.MenuActivity;
 import com.kavinoo.kavinoo.activity.ProfileActivity;
 import com.kavinoo.kavinoo.activity.SearchPlaceActivity;
+import com.kavinoo.kavinoo.localdata.adapter.CategoryAdapterHome;
 import com.kavinoo.kavinoo.localdata.adapter.CategoryAdapterMain;
 import com.kavinoo.kavinoo.localdata.model.category.CategoriesItem;
+import com.kavinoo.kavinoo.localdata.model.category.CategoriesResponse;
 import com.kavinoo.kavinoo.localdata.viewmodel.CategoryViewModel;
+import com.kavinoo.kavinoo.onlinedata.links.KavinooLinks;
 
 import org.aviran.cookiebar2.CookieBar;
 
@@ -56,7 +67,6 @@ public class CategoryFragment extends Fragment{
     RecyclerView recyclerMainCategory;
     CategoryAdapterMain adapter;
     RecyclerView.LayoutManager layoutManager;
-    CategoryViewModel categoryViewModelMain;
     ArrayList<CategoriesItem> categoryModelArrayListConvert=new ArrayList<>();
 
     AppCompatEditText categorySearchEditText;
@@ -138,11 +148,16 @@ public class CategoryFragment extends Fragment{
                 categorySearchEditText.setText("");
             }
         };
-        categoryViewModelMain= new ViewModelProviders().of(this).get(CategoryViewModel.class);
 
-        categoryViewModelMain.mainCategories().observe(this, new Observer<List<CategoriesItem>>() {
+
+        final StringRequest categoryDetailsReq = new StringRequest(Request.Method.GET, KavinooLinks.GET_CATEGORY_LIST, new Response.Listener<String>() {
             @Override
-            public void onChanged(List<CategoriesItem> categoriesItems) {
+            public void onResponse(String response) {
+
+                Gson gson = new Gson();
+                CategoriesResponse categoriesResponse = gson.fromJson(response, CategoriesResponse.class);
+
+                List<CategoriesItem> categoriesItems = categoriesResponse.getCategories();
 
                 categoryModelArrayListConvert= (ArrayList<CategoriesItem>) categoriesItems;
                 adapter=new CategoryAdapterMain(categoryModelArrayListConvert,getActivity().getApplicationContext(),onClickCategoryMain);
@@ -150,8 +165,16 @@ public class CategoryFragment extends Fragment{
                 layoutManager=new LinearLayoutManager(getActivity().getApplicationContext());
                 recyclerMainCategory.setLayoutManager(layoutManager);
                 recyclerMainCategory.setHasFixedSize(true);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
         });
+        categoryDetailsReq.setRetryPolicy(new DefaultRetryPolicy(6000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        App.getInstance().addToRequestQueue(categoryDetailsReq, "CATEGORYREQ");
 
         categorySearchEditText.addTextChangedListener(new TextWatcher() {
             @Override
