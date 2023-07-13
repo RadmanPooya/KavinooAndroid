@@ -167,8 +167,8 @@ public class ShowInMapActivity extends AppCompatActivity {
         searchPlaceAroundMe = findViewById(R.id.search_place_around_me);
         mapView.onCreate(savedInstanceState);
         latLngDefault = new LatLng();
-        latLngDefault.setLatitude(35.701087);
-        latLngDefault.setLongitude(51.397326);
+        latLngDefault.setLatitude(Double.parseDouble(userInfoManager.getLat()));
+        latLngDefault.setLongitude(Double.parseDouble(userInfoManager.getLon()));
 
 
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -179,10 +179,8 @@ public class ShowInMapActivity extends AppCompatActivity {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         mapStyle = style;
-                        //zoomToSpecificLocationDefault(latLngDefault);
-                        Log.i("SHOWMAP"," in map ready");
-
-                        getPlaceData("");
+                        zoomToSpecificLocationDefault(latLngDefault);
+                        getPlaceData(word);
 
                     }
                 });
@@ -416,11 +414,10 @@ public class ShowInMapActivity extends AppCompatActivity {
             public void onResponse(final String response) {
 
 
-                Log.i("SHOWMAP", response+ " is ressponse");
                 if(word.equals("")){
-                    placesItemList.clear();
+                    Log.i("QQWWX", "in ifff");
 
-                    Log.i("SHOWMAP", response.toString());
+                    placesItemList.clear();
 
                     Gson gson = new Gson();
 
@@ -431,6 +428,8 @@ public class ShowInMapActivity extends AppCompatActivity {
                     new ShowInMapActivity.MyTask().execute(placesItemList);
 
                 }else{
+                    Log.i("QQWWX", "in elseeeeeeeeeeeeeee");
+
                     mapView.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(@NonNull MapboxMap mapboxMap) {
@@ -441,13 +440,12 @@ public class ShowInMapActivity extends AppCompatActivity {
                                     mapStyle = style;
                                     placesItemList.clear();
 
-                                    Log.i("QQWW", response.toString());
-
                                     Gson gson = new Gson();
 
                                     PlacesResponse placesResponse = gson.fromJson(response, PlacesResponse.class);
 
                                     placesItemList = placesResponse.getPlaces();
+                                    Log.i("QQWWX", placesResponse.toString());
 
                                     new ShowInMapActivity.MyTask().execute(placesItemList);
                                 }
@@ -528,13 +526,16 @@ public class ShowInMapActivity extends AppCompatActivity {
             super.onPostExecute(bitmaps);
 
 
-            for (int i = 0; i < bitmaps.size(); i++) {
+            try {
+                for (int i = 0; i < bitmaps.size(); i++) {
 
-                addSymbolToMap(latLngList.get(i), bitmaps.get(i),placesItemList.get(i));
+                    addSymbolToMap(latLngList.get(i), bitmaps.get(i), placesItemList.get(i));
+
+                }
+                zoomToSpecificLocation(latLngList.get(0));
+            }catch (Exception e){
 
             }
-            zoomToSpecificLocation(latLngList.get(0));
-
         }
 
         @Override
@@ -610,7 +611,9 @@ public class ShowInMapActivity extends AppCompatActivity {
 
     }
 
-
+    private void zoomToSpecificLocationDefault(LatLng samplePoint) {
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(samplePoint, 12));
+    }
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
