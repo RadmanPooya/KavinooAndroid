@@ -29,13 +29,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:orientation="vertical"
         android:layout_marginTop="@dimen/_9sdp"
+        android:layout_marginStart="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="@+id/image_place_main_card_view"
         app:layout_constraintEnd_toStartOf="@+id/image_place_main_card_view"
+        app:layout_constraintStart_toStartOf="@+id/places_details_card_view"
         app:layout_constraintTop_toTopOf="@id/places_details_card_view">
 
         <TextView
@@ -46,7 +48,7 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="رستوران آشپزباشی"
+            android:text="رستوران آشپزباشی رستوران آشپزباشی رستوران آشپزباشی"
             android:textColor="#000000"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold" />
