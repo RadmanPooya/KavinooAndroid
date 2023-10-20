@@ -553,6 +553,18 @@ public class PlaceActivity extends AppCompatActivity {
                 favoriteCountPlaceDetails.setText(String.valueOf(placeDetails.getFavoriteCount()));
                 address.setText(placeDetails.getAddress());
 
+                if(placeDetails.isHasDigitalMenus()){
+                    digitalMenuPlaceImageView.setVisibility(View.VISIBLE);
+                }else {
+                    digitalMenuPlaceImageView.setVisibility(View.GONE);
+                }
+
+                if (placeDetails.isHasFacilities()) {
+                    facilitiesPlaceImageView.setVisibility(View.VISIBLE);
+                } else {
+                    facilitiesPlaceImageView.setVisibility(View.GONE);
+                }
+
                 if (placeDetails.getSlogan().equals("")) {
                     sloganConstraint.setVisibility(View.GONE);
                 }
@@ -718,7 +730,7 @@ public class PlaceActivity extends AppCompatActivity {
                     }
                 }
 
-                rateNumber.setText(placeDetails.getRate()+"");
+                rateNumber.setText("امتیاز "+placeDetails.getRate()+" از "+placeDetails.getRatesCount()+" رای");
                 int rondRate = (int) placeDetails.getRate();
                 if (rondRate == 0) {
                     rateImageView.setImageResource(R.drawable.hrate0);

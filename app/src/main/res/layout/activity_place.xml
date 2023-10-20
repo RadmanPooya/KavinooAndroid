@@ -177,14 +177,16 @@
                         <TextView
                             android:id="@+id/place_title_main"
                             style="@style/iransansregular"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text=" اتحادیه شرکت"
                             android:layout_marginHorizontal="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:ellipsize="end"
                             android:textColor="#000000"
                             android:textSize="@dimen/_17sdp"
                             android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@id/rate_image_view"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -192,18 +194,19 @@
                             android:id="@+id/rate_image_view"
                             android:layout_width="@dimen/_65sdp"
                             android:layout_height="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
                             android:layout_marginHorizontal="@dimen/_6sdp"
                             android:src="@drawable/hrate0"
-                            app:layout_constraintBottom_toTopOf="@id/linearLayout2"
-                            app:layout_constraintStart_toEndOf="@id/rate_number"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintEnd_toEndOf="@id/rate_number"
+                            app:layout_constraintStart_toStartOf="@id/rate_number"
+                            app:layout_constraintTop_toBottomOf="@+id/rate_number" />
 
                         <TextView
                             android:id="@+id/rate_number"
                             style="@style/iransansregular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4.5"
+                            android:text="امتیاز 4.5 از 75 رای"
                             android:textColor="#7e7f80"
                             android:textSize="@dimen/_12ssp"
                             android:textStyle="bold"

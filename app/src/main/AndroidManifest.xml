@@ -18,9 +18,13 @@
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
         <activity
-            android:name=".activity.FullScreenTizerActivity"
+            android:name=".activity.PanoramaActivity"
             android:exported="false"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.FullScreenTizerActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.StartIntroActivity"
             android:exported="false" />

@@ -32,6 +32,39 @@ public class PlaceDetails{
 	@SerializedName("rate")
 	private int rate;
 
+	@SerializedName("rates_count")
+	private int ratesCount;
+
+	@SerializedName("has_facilities")
+	private boolean hasFacilities;
+
+	@SerializedName("has_digital_menus")
+	private boolean hasDigitalMenus;
+
+	public int getRatesCount() {
+		return ratesCount;
+	}
+
+	public boolean isHasFacilities() {
+		return hasFacilities;
+	}
+
+	public boolean isHasDigitalMenus() {
+		return hasDigitalMenus;
+	}
+
+	public void setRatesCount(int ratesCount) {
+		this.ratesCount = ratesCount;
+	}
+
+	public void setHasFacilities(boolean hasFacilities) {
+		this.hasFacilities = hasFacilities;
+	}
+
+	public void setHasDigitalMenus(boolean hasDigitalMenus) {
+		this.hasDigitalMenus = hasDigitalMenus;
+	}
+
 	@SerializedName("telephone03")
 	private String telephone03;
 
@@ -358,41 +391,43 @@ public class PlaceDetails{
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"PlaceDetails{" + 
-			"header_image = '" + headerImage + '\'' + 
-			",distance = '" + distance + '\'' + 
-			",latitude = '" + latitude + '\'' + 
-			",description = '" + description + '\'' + 
-			",title = '" + title + '\'' + 
-			",mobile02 = '" + mobile02 + '\'' + 
-			",mobile03 = '" + mobile03 + '\'' + 
-			",telephone01 = '" + telephone01 + '\'' + 
-			",rate = '" + rate + '\'' + 
-			",telephone03 = '" + telephone03 + '\'' + 
-			",telephone02 = '" + telephone02 + '\'' + 
-			",telephone04 = '" + telephone04 + '\'' + 
-			",favorite_count = '" + favoriteCount + '\'' + 
-			",id = '" + id + '\'' + 
-			",fax = '" + fax + '\'' + 
-			",telegram_id = '" + telegramId + '\'' + 
-			",longitude = '" + longitude + '\'' + 
-			",area = '" + area + '\'' + 
-			",image = '" + image + '\'' + 
-			",website = '" + website + '\'' + 
-			",visit_count = '" + visitCount + '\'' + 
-			",assessments = '" + assessments + '\'' + 
-			",digital_menus = '" + digitalMenus + '\'' + 
-			",address = '" + address + '\'' + 
-			",checkin_count = '" + checkinCount + '\'' + 
-			",comments = '" + comments + '\'' + 
-			",instagram_id = '" + instagramId + '\'' + 
-			",mobile_primary = '" + mobilePrimary + '\'' + 
-			",comments_count = '" + commentsCount + '\'' + 
-			",category = '" + category + '\'' + 
-			",facilities = '" + facilities + '\'' + 
-			",slogan = '" + slogan + '\'' + 
-			"}";
-		}
+	public String toString() {
+		return "PlaceDetails{" +
+				"headerImage='" + headerImage + '\'' +
+				", distance=" + distance +
+				", latitude=" + latitude +
+				", description='" + description + '\'' +
+				", title='" + title + '\'' +
+				", mobile02='" + mobile02 + '\'' +
+				", mobile03='" + mobile03 + '\'' +
+				", telephone01='" + telephone01 + '\'' +
+				", rate=" + rate +
+				", ratesCount=" + ratesCount +
+				", hasFacilities=" + hasFacilities +
+				", hasDigitalMenus=" + hasDigitalMenus +
+				", telephone03='" + telephone03 + '\'' +
+				", telephone02='" + telephone02 + '\'' +
+				", telephone04='" + telephone04 + '\'' +
+				", favoriteCount=" + favoriteCount +
+				", id=" + id +
+				", fax='" + fax + '\'' +
+				", telegramId='" + telegramId + '\'' +
+				", longitude=" + longitude +
+				", area=" + area +
+				", image=" + image +
+				", website='" + website + '\'' +
+				", visitCount=" + visitCount +
+				", assessments=" + assessments +
+				", digitalMenus=" + digitalMenus +
+				", address='" + address + '\'' +
+				", checkinCount=" + checkinCount +
+				", comments=" + comments +
+				", instagramId='" + instagramId + '\'' +
+				", mobilePrimary='" + mobilePrimary + '\'' +
+				", commentsCount=" + commentsCount +
+				", category=" + category +
+				", facilities=" + facilities +
+				", slogan='" + slogan + '\'' +
+				'}';
+	}
 }
